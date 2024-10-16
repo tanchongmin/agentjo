@@ -1,0 +1,220 @@
+15 Oct 2024 (v4.0.0)
+- GitHub now under a personal account to encourage more open-sourced contributions
+
+6 Sep 2024 (v3.3.4)
+- Added contribution guide for Wrappers, Memory class, Jupyter Notebook in contrib folder
+- Removed `isempty` function usage for `Memory` class in `agent.py` because we do not need to check for this condition anymore if memory is always filled
+- Removed `add_file` compulsory function for `MemoryTemplate` in `memory.py` because not all memory types need files
+- Added `thoughts` variable to Agent, which is a list to capture the Thoughts, Observations, Current Subtask, Equipped Function for each step
+- Updated Tutorial 6 to use `ConversationWrapper`, which superclasses the Agent and enables the ConversationWrapper to also perform the Agent's functions. Moving ahead, we will have various wrappers like ReflectionWrapper, PlannerWrapper and many more to augment Agent's capabilitieis
+
+5 Aug 2024 (v3.3.3)
+- Refined ChromaDB Memory (credit: Prince Saroj)
+- Added asyncio and chromadb dependency
+- Refined Tutorial 3 to better illustrated how to use the various memory types
+
+29 Jul 2024 (v3.3.2)
+- Added ChromaDB Memory to use VectorDB for insertion and retrieval of memories (credit: Prince Saroj)
+
+25 Jul 2024 (v3.3.1)
+- Fixed a missing filter for strict_json_async to get only the text within {} for json
+- Added a MemoryTemplate in memory.py, to serve as foundation for VectorDBMemory and GraphMemory
+
+25 Jul 2024 (v3.3.0)
+- For strict_json, changed the output to be f'''\nOutput in the following json template: ```{new_output_format}```
+Update values enclosed in <> and remove the <>. 
+Your response must only be the updated json template beginning with {{ and ending with }}
+Ensure the following output keys are present in the json: {' '.join(list(new_output_format.keys()))}'''
+
+This helps by changing ['###key###'] into ###key### , which helps Llama 3 8B better understand how to format the json
+
+- Fixed an error with assign_functions() when assigning Inner Agents, as it assigns the Meta Agent instead of the Inner Agent inside this function
+- Updated Inner Agent in shared variables under 'agent' for Inner Agent calls
+
+22 Jul 2024 (v3.2.1)
+- Changed all default model parameters in TaskGen Tutorial Notebooks and code to be 'gpt-4o-mini' instead of 'gpt-3.5-turbo' for cheaper and better performance
+- Works with existing notebooks with minimal changes (needed to specify "Only provides cooking guidance" instead of "provides cooking guidance" in agent description of TaskGen Ask Me Anything Notebook to make the reply\_user more factual and related to agent's description)
+- Memory (Tutorial 3) now works perfectly with 'gpt-4o-mini' and not just with 'gpt-4o'
+
+10 Jul 2024 (v3.2.0)
+- Updated strict_json prompt to be f'''\nOutput in the following json template: ```{new_output_format}```
+Update values enclosed in <> and remove the <>. 
+Your response must only be the updated json template beginning with {{ and ending with }}
+Ensure the following output keys are present in the json: {list(new_output_format.keys())}'''
+This will help smaller models like Llama 3 8B generate more reliably.
+- Added explicit mention of output field keys in Agent prompts to aid smaller models
+- Changed get_next_subtask() to output Equipped Function Name instead of Equipped Function for better LLM understanding, and changed prompt to include Observation and Thoughts as well
+- Updated retrieve_by_ranker() in memory.py to only retrieve when the memory items are more than top_k. This helps to save some costs by not performing the retrieval when not needed
+- Fixed some issues with Tutorials with no llm variable, and missing imports
+
+6 Jul 2024 (v3.1.0)
+- Changed Subtask Completed's subtask to be the function name + function params in order to 1) reduce verbosity, 2) make the subtask accurate as it is what is actually done
+- Made prompt to get input parameters of Equipped Function more concise by removing Thoughts and only focusing on Current Subtask
+- made `contribute_agent()` specify the github user name as well in the agent in order to avoid conflicts between user
+- Fixed a bug with AsyncAgent Function Calling in `run()` due to a missing `await` keyword
+- For `use_llm` function prompt, added "Do not just state that you performed the task, generate the detailed outcome as well." to get it to actually generate stuff out
+- Revamped all Tutorials to use llm variable as default for `Agent`, `Function`, `strict_json`, `strict_json_async`, `AsyncFunction`, `AsyncAgent`
+- Added more examples for Shared Variables and Global Context, which is the bedrock of TaskGen for things like LLM OS. Also, reorganised the Tutorials in order of priority
+
+3 Jul 2024 (v3.0.0)
+- Edited the `strict_json` and `strict_json_async` prompt to list out all the json output keys, so that the LLM will be more grounded
+- Edited the `convert_to_dict` function in `base.py` to make it more robust to variations of incorrect keys, edited error message for incorrect key to make it more robust
+- Changed the `conversation.py` Conversable Class to make it output Action Done in text format (instead of Subtasks Completed), which could be understood by LLMs in a better way
+- Ensured the examples in Tutorial 7 would work for ChatGPT, Claude Haiku and Llama3 70B
+- Despite repeated attempts to ensure compatibility for Llama3 8B, the json generating abilities are not good enough for TaskGen purposes
+
+2 Jul 2024 (v2.6.0)
+- Removed Actual Subtasks in get_next_subtasks() of Agent and AsyncAgent. It was interferring with getting the functions for Function Calling.
+
+2 Jul 2024 (v2.5.1)
+- Added auto-chunking for memory with pdf, csv, excel, docx files using `add_file` method in Memory class (Credit: Prince Saroj)
+- Updated Tutorial 4 to use docstring for external functions, and to showcase auto-chunking in memory (Credit: Prince Saroj)
+- Added in llm from agent to Memory as default, so that Memory retrieve_by_llm could be done via the same llm as the agent
+- Added in dependencies: langchain, PyPDF2, python-docx, pandas, xlrd
+
+1 Jul 2024 (v2.5.0)
+- Added `ConversableAgent` class in `conversation.py`
+- For Agent's query() function, changed it to using user_prompt instead of system_prompt, as it caused ChatGPT some issues in identifying the user input when user_prompt was blank
+- Changed Updated Subtask to Actual Subtask in get_next_subtask in agent.py, for robustness
+- Changed `contribute_agent` code to be done without the need for git clone (Credit: Hardik)
+- Only import OpenAI when necessary in ranker.py, base.py, base_async.py (Credit: JiangZhuo)
+
+28 Jun 2024 (v2.4.1)
+- Added `code_action` as an input variable for Agent, which when set to True, will by default use the `python_generate_and_run_code_tool` function all the time except for end_task (which you need to equip to the Agent yourself externally)
+- Updated Tutorial 6 for Code as Action agent
+- Fixed some minor issues for `contribute_agent` code
+
+2 Jun 2024 (v2.4.0)
+- Added Async Support for `Agent`, `Function` and `strict_json` (credit to Prince Saroj)
+- New Async Classes: AsyncAgent, AsyncFunction, AsyncMemory, AsyncRanker
+- New Async function: strict_json_async
+- New Support: support for async external functions
+- Added Tutorials 8 and 9 to show how to use TaskGen in Async mode
+- Added `contribute_agent` and `load_community_agent` (credit to Hardik) so as to easily contribute an Agent in code form, and download a community agent by {{agent_class_name}}. Community agents will be in the path https://github.com/simbianai/taskgen/contrib/community/{{agent_class_name}}
+- Added aliases `use_tool` for `use_function`, `list_tools` for `list_functions`, `print_tools` for `print_functions`, `assign_tools` for `assign_functions`, `remove_tool` for `remove_function`
+- Added a smart check for `assign_functions` to see if you are assigning an Agent. If so, we will automatically call `assign_agents` for you
+
+24 May 2024 (v2.3.1)
+- Hierarchical Agents:
+    - Inner agents will no longer be able to modify meta agent's subtasks
+    - Inner agents will be outputting a summary of what they have done via reply_user() instead of everything that they have done
+- Global Context: Added option to provide global context as a string with <var> that will be replaced with corresponding names in shared_variables at run-time (variable global_context)
+- Shared Variables: Added an 'agent' shared variables which points to itself, so that functions can access anything the agent has access to
+- Memory: Changed Memory prompt to Knowledge Reference for better understanding by LLM
+- Next Subtask:
+    - Changed End Task (end_task) description to "Passes the final output to the user", so as to help map the end task action to reply user action which the LLM understands better
+    - Modified the prompt for `get_subtasks_completed()` to better reflect that no further user input is expected, and not to repeat previous subtasks unless really needed, and that no user output is needed
+    - Current Subtask generated is now with greater detail and with all context needed
+    - Better input variable generation for Equipped Function for Agents
+    - Modified the prompt the `use_llm()` function to know it is part of Agent
+    - Changed the `summarise_subtasks_count` to 5 so that it doesn't summarise too often
+- StrictJSON: 
+    - Fixed nested array issue whereby we did not process nested Array[] due to not including that as part of regex (List[] works)
+    - type: code now converts python```code``` -> code, which makes it more versatile for LLM code generation
+
+18 May 2024 (v2.3.0)
+- Changed Agent main prompt in `use_llm()` and `get_subtasks_completed()` and `reply_user()` to better reflect Agent is helping User to complete Assigned Task without needing any input from User, or to output directly to User. ChatGPT's prompting is heavily biased to helping Users, so it helps the Agent output much better
+- After generating parameters for the Equipped Functions, we will modify the Current Subtask to better match what is done in the Equipped Functions. This helps the Agent better understand what has been done
+- Added back unicode_escape decoding in `strict_json`, but it doesn't decode for all unicode escapes, just \\t, \\n, \\' and \\". Using type: code will do for all unicode escapes
+
+18 May 2024 (v2.2.0)
+- Added color for output text of Agent
+- Made `get_next_subtasks` and `use_llm` prompts more versatile
+- Improved definitions of `use_llm` and `end_task` default functions for Agent
+- Added `summarise_subtasks_count` for `Agent`, which summarises Subtasks Completed every `summarise_subtasks_count` iterations according to overall task
+- Fixed issue with Hierarchical Agents whereby the memory_bank's `Function` key in `Agent` class was overwritten by instantating of new agents. Turns out that input variables of type dict will get carried over to all instantiations of the Class. We have to set it as None, and define the dictionary within the function to prevent this
+- Fixed the dictionary input variables to None for `strict_json` and `Function` and `Ranker` as well
+- Added a `retrieve_fn` in `Memory` class to enable vector database queries
+- split function.py from base.py as it was getting large
+- type: code introduced for `strict_json` so we won't force to unicode for all strings with \\
+
+10 May 2024 (v2.1.1)
+- Ensure that external_fn must be a Python function and not a Class method, as the latter does not encompass all the necessary input variables
+- Better prompting for `get_next_subtask` to end task more effectively when Assigned Task is completed
+
+10 May 2024 (v2.1.0)
+- `Agent.assign_functions()` now takes in Python functions without need to parse into `Function` class first - output format, description and input variables will be inferred from function signature and docstring
+- `Function()` now allows just parsing the entire thing from external function, using `Function(external_fn = fn)`
+- Created Tutorial 6: External Function Interface to demonstrate the new function interfacing capabilities for TaskGen Agents and interfacing with LangChain and LlamaIndex
+- Better prompting for `get_next_subtask` to be more detailed in the next subtask
+- Made `use_llm()` aware that it is called `use_llm`, so it doesn't return an error saying it does not have that function
+
+9 May 2024 (v2.0.1)
+- Fixed a bug with `async_strict_json` to incorporate one `async_chat()` call instead of `chat()`
+
+9 May 2024 (v2.0.0)
+- HUGE: Revamped `get__next_subtask` to remove overall plan array, and make LLM only do single step lookahead (works much better without much hallucination of tasks)
+- HUGE: Async support added. Added async_chat, async_strict_json, async Function call in base.py
+- Reprompted `reply_user()` to respond to task completion status better if there is no query
+- Reformatted `Global Context:` in prompt to make it enclose everything in `get_global_context()`
+- Made context of `use_llm()` function better for better generation
+
+5 May 2024 (v1.4.0)
+- Changed prompt of strict_json to make it compatible with more LLMs and improve performance on ChatGPT: 
+    '''\nOutput in the following json string format: {new_output_format}
+    Update text enclosed in <>. Output only a valid json string beginning with {{ and ending with }}'''
+- Fixed an error with input parameter mismatch in remove() in Memory
+- Added more external LLM examples in Tutorial 0
+- Updated all Tutorials
+
+22 Apr 2024 (v1.3.2)
+- Changes requirements.txt to dill>=0.3.7 so that it can run with colab
+- Added return_as_json = True as an input variable to strict_json (default: False, so it will be a python dictionary), so that you can get the json string as output if needed. Works also for OpenAIJson mode
+
+16 Apr 2024 (v1.3.1)
+- Changed requirements.txt to openai>=1.3.6 so that it is compatible with newer versions of LangChain
+
+26 Mar 2024 (v1.3.0)
+- Changed `get_additional_context` to `get_global_context` to better reflect that it is information that carries over across tasks
+- Refined Tutorial 5 Chatbot with Sherlock Holmes example to make it more performant with some prompt changes
+
+22 Mar 2024 (v1.2.0)
+- Changed StrictJSON prompt to make it better: Added "You must output valid json with all keys present." to system prompt of `strict_json` to make it more robust
+- Added `is_compulsory` variable in `Function`. Default: `False`. When set to `True`, make them always appear for planning regardless of whether RAG is used
+- Added more examples for memory
+
+18 Mar 2024 (v1.1.0)
+- Made the llm variable more robust by explicitly referencing it in the calls from `Agent` to `Function` to `strict_json`
+- Added agent loading and saving using `save_agent` and `load_agent`
+- Added `get_additional_context` for persistent variables and additional prompts to be given to `Agent`
+- Ensure that in `Ranker`, the query and key are always string to prevent unhashable types from being referenced by dictionary
+- If function takes in no input, in `next_subtasks_completed()` we will not force the LLM to output the parameter and skip the step for input parameter type conformity
+
+3 Mar 2024 (v1.0.0)
+- Better prompt engineering for `use_llm`, `reply_user`, `get_next_subtask`
+- Subtasks completed index now a string so as to store unhashable datatypes too
+- Added functionality for removing `use_llm` and `end_task` as functions of Agent (in case you want to do manual execution of functions)
+- Now allowing for duplicate subtask names by adding (count) at the end of the subtask instruction -> needed for OS-like usage\
+- Equipped Function in `get_next_subtask()` now uses an Enum to force the answer into a legitimate assigned function
+- `get_next_subtask()` now generates the Equipped Function Inputs separately for non-instruction-based inputs, allowing for all input fields and input types to be enforced by strictjson
+- Better distinguished between Subtask and Overall Task in `use_llm`, so that `use_llm` should only focus on the current Subtask and not solve Overall Task directly
+- Fixed issue with nested outputs of nested dictionaries / lists after I added the true/false to True/False auto conversion
+
+1 Mar 2024 (v0.0.8)
+- Added automatic parsing of fn_description from external function's docstring if fn_description is not provided for `Function()`
+- type checks now support `array`: same functionality as `list`, but LLM may understand `array` better due to JSON formatting type
+- Auto type conversion from list to array after `type:` in `output_format`
+
+29 Feb 2024 (v0.0.7)
+- Throws an exception when `type:` is given in `output_format` for `Function()` when using External Functions as we do not do type checking there
+- Throws a similar exception when `type:` is given in `output_format` for `openai_json_mode = True` in `strict_json` or `Function`
+
+28 Feb 2024 (v0.0.6)
+- Made list processing in StrictJSON more robust
+
+26 Feb 2024 (v0.0.5)
+- Added memory and RAG on functions and additional context based on task / overall plan
+
+25 Feb 2024 (v0.0.4)
+- Added shared variables, enabling a pool of shared variables to persist between functions for better handling of non-text modalities as well as long text
+- Refined the prompt for get_next_subtask() in order to do element by element check of whether the Overall Plan is completed
+- Changed the dictionary parsing of StrictJSON to ensure that we extract the leftmost and rightmost { and } respectively to do ast.literal_eval. Previously might have the quotation marks at the left and right which affected parsing
+- Changed the bool parsing of StrictJSON to convert true/false to True/False first so as to make it parseable by ast.literal_eval
+
+22 Feb 2024 (v0.0.3)
+- Added hierarchical agents
+- Refined prompts for use_llm and reply_user
+- Agents now use subtasks_completed as a memory for context for future generation
+
+17 Feb 2024 (v0.0.1)
+- Creation of TaskGen, a task-based agentic framework building on StrictJSON outputs by LLM agents
