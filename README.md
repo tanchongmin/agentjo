@@ -66,7 +66,7 @@ I can't wait to see what this new framework can do for you!
 - Supported by Simbian AI from Feb 2024 to Oct 15, 2024
 
 ## How do I use this? 
-1. Download package via command line ```pip install taskgen-ai```
+1. Download package via command line ```pip install taskgen-alpha```
 2. Set up your LLM and provide any API keys if needed
 3. Import the required functions from ```taskgen``` and use them!
 
