@@ -2,7 +2,10 @@
 ### A Task-based agentic framework building on StrictJSON outputs by LLM agents
 #### An Open Source Initiative Led by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
 
+Road Map:
 ![TaskGen Future Plans](./resources/Future_Plans.png)
+
+Agentic System Overview:
 ![TaskGen Overview](./resources/TaskGen_Overview.png)
 
 - How to contribute to TaskGen: https://www.youtube.com/watch?v=BqLeA13n6KI
