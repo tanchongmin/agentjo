@@ -2,6 +2,7 @@
 ### A Task-based agentic framework building on StrictJSON outputs by LLM agents
 #### An Open Source Initiative Led by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
 
+![TaskGen Future Plans](./resources/Future_Plans.png)
 ![TaskGen Overview](./resources/TaskGen_Overview.png)
 
 - How to contribute to TaskGen: https://www.youtube.com/watch?v=BqLeA13n6KI
@@ -59,7 +60,7 @@ I can't wait to see what this new framework can do for you!
 - Collaborators welcome
 
 ### Acknowledgements
-- Supported by Simbian from Feb 2024 to Oct 15, 2024
+- Supported by Simbian AI from Feb 2024 to Oct 15, 2024
 
 ## How do I use this? 
 1. Download package via command line ```pip install taskgen-ai```
