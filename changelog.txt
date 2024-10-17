@@ -1,5 +1,8 @@
-15 Oct 2024 (v4.0.0)
-- GitHub now under a personal account to encourage more open-sourced contributions
+17 Oct 2024 (v0.0.1)
+- TaskGen now renamed TaskGen Alpha to denote the beginning of focus on agentic wrappers and outside-of-agent workflows
+- Added road map of TaskGen to the README.md
+
+== TaskGen ==
 
 6 Sep 2024 (v3.3.4)
 - Added contribution guide for Wrappers, Memory class, Jupyter Notebook in contrib folder
