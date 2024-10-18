@@ -1,4 +1,5 @@
-# TaskGen (Alpha) v0.0.1
+# TaskGen v0.0.1
+### Version Alpha
 ### A Task-based agentic framework building on StrictJSON outputs by LLM agents
 #### An Open Source Initiative Led by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
 
