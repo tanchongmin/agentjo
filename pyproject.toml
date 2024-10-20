@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "taskgen-alpha"
+name = "agentjo"
 version = "0.0.1"
 authors = [
   { name="John Tan Chong Min", email="tanchongmin@gmail.com" },
@@ -22,5 +22,5 @@ dependencies = ["openai>=1.3.6",
 "asyncio"]
 
 [project.urls]
-Homepage = "https://github.com/tanchongmin/taskgen"
-Issues = "https://github.com/tanchongmin/taskgen/issues"
+Homepage = "https://github.com/tanchongmin/agentjo"
+Issues = "https://github.com/tanchongmin/agentjo/issues"

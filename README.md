@@ -1,31 +1,29 @@
-# TaskGen (Alpha) v0.0.1
-### A Task-based agentic framework building on StrictJSON outputs by LLM agents
+# AgentJo v0.0.1
+### Fast Learning and Adaptable Agent Communities building Upon TaskGen and StrictJSON
 #### An Open Source Initiative Led by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
-#### This is John's dream to create fast learning and adaptable agents, TaskGen (Base) was done with Simbian AI from Feb to Oct 15, 2024
+#### This is John's dream to create fast learning and adaptable agents. Base is TaskGen created with Simbian AI in 2024.
 
-Road Map:
-![TaskGen Future Plans](./resources/Future_Plans.png)
+Road Map (Currently at Alpha):
+![AgentJo Future Plans](./resources/Future_Plans.png)
 
 Agentic System Overview:
-![TaskGen Overview](./resources/TaskGen_Overview.png)
+![AgentJo Overview](./resources/TaskGen_Overview.png)
 
-- How to contribute to TaskGen: https://www.youtube.com/watch?v=BqLeA13n6KI
+- How to contribute to AgentJo: https://www.youtube.com/watch?v=BqLeA13n6KI
 - Discussion Channel (John's AI Group): [https://discord.gg/bzp87AHJy5](https://discord.gg/bzp87AHJy5)
 - Documentation (Credit: Brian Lim): https://taskgen.readthedocs.io/en/latest/taskgen/index.html
+
 - Paper: https://web3.arxiv.org/pdf/2407.15734
 - Video: https://www.youtube.com/watch?v=F3usuxs2p1Y
+
+- Related Repositories: TaskGen (https://github.com/simbianai/taskgen)
 - Related Repositories: StrictJSON (https://github.com/tanchongmin/strictjson) [Do help star this as well!]
 
-Other related videos:
-- TaskGen Details (Part 1): https://www.youtube.com/watch?v=O_XyTT7QGH4
-- TaskGen Details (Part 2): https://www.youtube.com/watch?v=OWk7moRfTPE
-- TaskGen Ask Me Anything: https://www.youtube.com/watch?v=mheIWKugqF4
-
 Outreach / Consultancy Services:
-- As part of our outreach efforts, we are actively providing consultation services to integrate TaskGen into your production pipelines. Contact [John](https://www.linkedin.com/in/john-chong-min-tan-94652288/) or [Brian](https://www.linkedin.com/in/brianlimyisheng/) or [Richard Cottrill](https://www.linkedin.com/in/richardc/) to schedule an appointment!
+- As part of our outreach efforts, we are actively providing consultation services to integrate AgentJo into your production pipelines. Contact [John](https://www.linkedin.com/in/john-chong-min-tan-94652288/) or [Brian](https://www.linkedin.com/in/brianlimyisheng/) or [Richard Cottrill](https://www.linkedin.com/in/richardc/) to schedule an appointment!
 
 ### Creator's Preamble
-Happy to share that the task-based agentic framework I have been working on - TaskGen - is largely complete! 
+Happy to share that the task-based agentic framework I have been working on - AgentJo - is largely complete! 
 
 Noteable features include:
 - Splitting of Tasks into subtasks for bite-sized solutions for each subtask
@@ -37,11 +35,10 @@ Noteable features include:
 - Memory to provide additional task-based prompts for task
 - Global Context for configuring your own prompts + add persistent variables
 - Async mode for Agent, Function and `strict_json` added
-- Community Uploading and Downloading of Agent and Functions
 
 I am quite sure that this is the best open-source agentic framework for task-based execution out there! 
 Existing frameworks like AutoGen rely too much on conversational text which is lengthy and not targeted.
-TaskGen uses StrictJSON (JSON parser with type checking and more!) as the core, and agents are efficient and are able to do Chain of Thought natively using JSON keys and descriptions as a guide.
+AgentJo uses StrictJSON (JSON parser with type checking and more!) as the core, and agents are efficient and are able to do Chain of Thought natively using JSON keys and descriptions as a guide.
 
 What can you do to help (see contrib folder for more details): 
 - Star the github so more people can use it (It's open source and free to use, even commercially!)
@@ -60,19 +57,19 @@ I can't wait to see what this new framework can do for you!
 - Created: 17 Feb 2024 by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
 - Lead Contributor: [Prince Saroj](https://www.linkedin.com/in/psaroj/)
 - Lead Documentation: [Brian Lim](https://www.linkedin.com/in/brianlimyisheng/)
-- TaskGen Paper Research Staff: [Prince Saroj](https://www.linkedin.com/in/psaroj/), [Hardik Maheshwari](https://www.linkedin.com/in/hardik1496/), [Bharat Runwal](https://www.linkedin.com/in/bharat-runwal-673144196/), [Brian Lim](https://www.linkedin.com/in/brianlimyisheng/), [Richard Cottrill](https://www.linkedin.com/in/richardc/)
+- Paper Research Staff: [Prince Saroj](https://www.linkedin.com/in/psaroj/), [Hardik Maheshwari](https://www.linkedin.com/in/hardik1496/), [Bharat Runwal](https://www.linkedin.com/in/bharat-runwal-673144196/), [Brian Lim](https://www.linkedin.com/in/brianlimyisheng/), [Richard Cottrill](https://www.linkedin.com/in/richardc/)
 - Collaborators welcome
 
 ## How do I use this? 
-1. Download package via command line ```pip install taskgen-alpha```
+1. Download package via command line ```pip install agentjo```
 2. Set up your LLM and provide any API keys if needed
-3. Import the required functions from ```taskgen``` and use them!
+3. Import the required functions from ```agentjo``` and use them!
 
 ## Differences in LLM for Agentic Framework
 - Default model is now gpt-4o-mini if you do not specify any LLM!
 - Weaker models like ChatGPT (gpt-3.5-turbo) and Llama 3 8B are consistent only if you specify very clearly what you want the Agent to do and give examples of what you want
 - gpt-4o-mini, gpt-4o, Llama 3 70B and more advanced models can perform better zero-shot without much examples
-- TaskGen is compatible with ChatGPT and similar models, but for more robust use, consider using gpt-4o-mini and better models
+- AgentJo is compatible with ChatGPT and similar models, but for more robust use, consider using gpt-4o-mini and better models
 
 # 1. Agent Basics
 - Create an agent by entering your agent's name and description
@@ -305,7 +302,7 @@ Ensure your quotes contain only ' within the quote, and are enclosed by " ''',
 
 # 5. Global Context
 
-- `Global Context` is a very powerful feature in TaskGen, as it allows the Agent to be updated with the latest environmental state before every decision it makes
+- `Global Context` is a very powerful feature in AgentJo, as it allows the Agent to be updated with the latest environmental state before every decision it makes
 - It also allows for learnings in `shared_variables` to be carried across tasks, making the Agent teachable and learn through experiences
 - A recommended practice is to always store the learnings of the Agent during the External Function call, and reset the Agent after each task, so that `subtasks_completed` will be as short as possible to avoid confusion to the Agent
 
@@ -346,7 +343,7 @@ agent = Agent('Inventory Manager',
     
 # Other Features
 - There are other features like Memory (Tutorial 3), Hierarchical Agents (Tutorial 4), CodeGen and External Function Interfacing (Tutorial 5), Conversation Class (Tutorial 6)
-- These extend the baseline features of TaskGen and you are encouraged to take a look at the Tutorials for more information.
+- These extend the baseline features of AgentJo and you are encouraged to take a look at the Tutorials for more information.
 
 # Known Limitations
 - `gpt-3.5-turbo` is not that great with mathematical functions for Agents. Use `gpt-4o-mini` or better for more consistent results
@@ -357,7 +354,7 @@ agent = Agent('Inventory Manager',
 ## Test locally
 1. Clone the repository
 2. If using a virtual environment, activate it
-3. `cd` into taskgen repository
+3. `cd` into agentjo repository
 4. Install the package via command line `pip install -e .`
 5. Now you can import the package and use it in your code
 
@@ -369,7 +366,7 @@ agent = Agent('Inventory Manager',
 5. Submit a pull request
 
 # What are we looking out for?
-1. Contributing example Agents and Functions. Agents can now be contributed easily using `agent.contribute_agent()` and the entire Agent code with all the functions and memory will be converted to text-based code and put on the TaskGen GitHub. Do share your use cases actively so that other people can benefit :) These Agents can be downloaded by others via `agent.load_community_agent(agent_name)`
-2. Jupyter Notebooks showcasing what could be done with the framework for something useful. Let your imagination guide you, we look forward to see what you create
+1. Contributing Agent Wrappers and Memory Classes in contrib folder
+2. Contribute Jupyter Notebooks in contrib folder showcasing what could be done with the framework for something useful. Let your imagination guide you, we look forward to see what you create
 3. Other Known Limitations - Do test the framework out extensively and note its failure cases. We will see if we can address them, if not we will put them in Known Limitations.
 4. (For the prompt engineer). If you could find a better way to make the prompts work, let us know directly - we do need to test this out across all Tutorial Jupyter Notebooks to make sure that it really works with existing datasets. Also, if you are using other LLMs beside OpenAI, and find the prompts do not work as well - try to rejig your own prompts and let us know as well!

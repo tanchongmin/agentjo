@@ -1,8 +1,9 @@
-17 Oct 2024 (v0.0.1)
-- TaskGen now entering version Alpha to denote the beginning of focus on agentic wrappers and outside-of-agent workflows
-- Added road map of TaskGen to the README.md
+20 Oct 2024 (v0.0.1)
+- TaskGen now rebranded as AgentJo to denote the beginning of focus on agentic wrappers, outside-of-agent workflows, multi-agent worflows
+- Added road map of AgentJo to the README.md
+- Removed `contribute_agent` and corresponding functions to turn functions, agents, memory into Python code and auto-contribute. This process will be replaced by a fork and upload to GitHub directly, for neater version control
 
-== TaskGen (Alpha) ==
+== TaskGen -> AgentJo ==
 
 6 Sep 2024 (v3.3.4)
 - Added contribution guide for Wrappers, Memory class, Jupyter Notebook in contrib folder
