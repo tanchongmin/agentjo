@@ -8,7 +8,6 @@ Road Map (Currently at Alpha):
 Agentic System Overview:
 ![AgentJo Overview](./resources/TaskGen_Overview.png)
 
-- How to contribute to AgentJo: https://www.youtube.com/watch?v=BqLeA13n6KI
 - Discussion Channel (John's AI Group): [https://discord.gg/bzp87AHJy5](https://discord.gg/bzp87AHJy5)
 - Documentation (Credit: Brian Lim): https://taskgen.readthedocs.io/en/latest/taskgen/index.html
 
