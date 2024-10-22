@@ -1,5 +1,5 @@
 # AgentJo v0.0.1
-### Fast Learning and Adaptable Agent Communities building Upon TaskGen
+### Fast Learning and Adaptable Agent Communities building on TaskGen
 #### An Open Source Initiative Led by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
 #### This is John's dream to create fast learning and adaptable agents. TaskGen is the Base in the Road Map.
 Road Map (Currently at Alpha):
