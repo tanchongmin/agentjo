@@ -20,9 +20,9 @@ Outreach / Consultancy Services:
 - As part of our outreach efforts, we are actively providing consultation services to integrate AgentJo into your production pipelines. Contact [John](https://www.linkedin.com/in/john-chong-min-tan-94652288/) or [Brian](https://www.linkedin.com/in/brianlimyisheng/) or [Richard Cottrill](https://www.linkedin.com/in/richardc/) to schedule an appointment!
 
 ### Creator's Preamble
-Happy to share that the task-based agentic framework I have been working on - AgentJo - is largely complete! 
+Happy to share that we are beginning the phase to augment agents and incorporate them in larger systems.
 
-Noteable features include:
+The existing implementation already includes:
 - Splitting of Tasks into subtasks for bite-sized solutions for each subtask
 - Single Agent with LLM Functions
 - Single Agent with External Functions
