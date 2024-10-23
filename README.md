@@ -9,7 +9,6 @@ Agentic System Overview:
 ![AgentJo Overview](./resources/TaskGen_Overview.png)
 
 - Discussion Channel (John's AI Group): [https://discord.gg/bzp87AHJy5](https://discord.gg/bzp87AHJy5)
-- Documentation (Credit: Brian Lim): https://taskgen.readthedocs.io/en/latest/taskgen/index.html
 
 - Paper: https://web3.arxiv.org/pdf/2407.15734
 - Video: https://www.youtube.com/watch?v=F3usuxs2p1Y
