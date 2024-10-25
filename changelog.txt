@@ -10,7 +10,7 @@
 - Removed `isempty` function usage for `Memory` class in `agent.py` because we do not need to check for this condition anymore if memory is always filled
 - Removed `add_file` compulsory function for `MemoryTemplate` in `memory.py` because not all memory types need files
 - Added `thoughts` variable to Agent, which is a list to capture the Thoughts, Observations, Current Subtask, Equipped Function for each step
-- Updated Tutorial 6 to use `ConversationWrapper`, which superclasses the Agent and enables the ConversationWrapper to also perform the Agent's functions. Moving ahead, we will have various wrappers like ReflectionWrapper, PlannerWrapper and many more to augment Agent's capabilitieis
+- Updated Tutorial 6 to use `ConversationWrapper`, which superclasses the Agent and enables the ConversationWrapper to also perform the Agent's functions. Moving ahead, we will have various wrappers like ReflectionWrapper, PlannerWrapper and many more to augment Agent's capabilities
 
 5 Aug 2024 (v3.3.3)
 - Refined ChromaDB Memory (credit: Prince Saroj)
