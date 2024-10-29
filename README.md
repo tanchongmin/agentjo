@@ -9,11 +9,11 @@ Agentic System Overview:
 ![AgentJo Overview](./resources/TaskGen_Overview.png)
 
 - Discussion Channel (John's AI Group): [https://discord.gg/bzp87AHJy5](https://discord.gg/bzp87AHJy5)
-
-- Paper: https://web3.arxiv.org/pdf/2407.15734
-- Video: https://www.youtube.com/watch?v=F3usuxs2p1Y
+- Video: https://www.youtube.com/watch?v=u1BHvKRnhYY
 
 - Related Repositories: TaskGen (https://github.com/simbianai/taskgen)
+    - TaskGen Paper: https://web3.arxiv.org/pdf/2407.15734
+    - TaskGen Video: https://www.youtube.com/watch?v=F3usuxs2p1Y
 - Related Repositories: StrictJSON (https://github.com/tanchongmin/strictjson) [Do help star this as well!]
 
 Outreach / Consultancy Services:
