@@ -1,7 +1,7 @@
 import inspect
 import numpy as np
 
-from taskgen.utils import ensure_awaitable
+from agentjo.utils import ensure_awaitable
 
 
 class BaseRanker:
@@ -14,8 +14,6 @@ class BaseRanker:
         self.ranking_fn = ranking_fn
         self.database = database
 
-    def get_python_representation(self):
-        return f"{self.__class__.__name__}(model='{self.model}', ranking_fn={inspect.getsource(self.ranking_fn) if self.ranking_fn else None})"
     
     
 class Ranker(BaseRanker):
