@@ -20,6 +20,7 @@ Outreach / Consultancy Services:
 - As part of our outreach efforts, we are actively providing consultation services to integrate AgentJo into your production pipelines. Contact [John](https://www.linkedin.com/in/john-chong-min-tan-94652288/) or [Brian](https://www.linkedin.com/in/brianlimyisheng/) or [Richard Cottrill](https://www.linkedin.com/in/richardc/) to schedule an appointment!
 
 ### Acknowledgements
+- Idea for AgentJo was built over 5 years (2019 - 2024) during John's PhD, guided by Prof. Mehul Motani
 - Initial version of AgentJo (TaskGen) was during John's time at Simbian (Feb - Oct 2025), alongside talented individuals such as Prince Saroj, Brian Lim, Richard Cottrill, Bharat Runwal, Hardik
 - AgentJo paper's (in progress) usage of API keys are currently sponsored by Yanok and Ajentik.
 
