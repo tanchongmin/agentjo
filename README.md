@@ -21,7 +21,7 @@ Outreach / Consultancy Services:
 
 ### Acknowledgements
 - Idea for AgentJo was built over 5 years (2019 - 2024) during John's PhD, guided by Prof. Mehul Motani
-- Initial version of AgentJo (TaskGen) was done during John's time at Simbian (Feb - Oct 2025), alongside talented individuals such as Prince Saroj, Brian Lim, Richard Cottrill, Bharat Runwal, Hardik
+- Initial version of AgentJo (TaskGen) was done during John's time at Simbian (Feb - Oct 2024), alongside talented individuals such as Prince Saroj, Brian Lim, Richard Cottrill, Bharat Runwal, Hardik
 - AgentJo paper's (in progress) usage of API keys are currently sponsored by Yanok and Ajentik.
 
 ### Creator's Preamble
