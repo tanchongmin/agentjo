@@ -1,7 +1,7 @@
 # AgentJo (building on TaskGen) v0.0.1
 ### Towards Human-Friendly, Fast Learning and Adaptable Agent Communities
 #### An Open Source Initiative Led by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
-#### This is John's dream to create fast learning and adaptable agents. TaskGen is the Base in the Road Map.
+#### This is John's dream to create fast learning and adaptable agents
 Road Map (Currently at Alpha):
 ![AgentJo Future Plans](./resources/Future_Plans.png)
 
@@ -11,7 +11,7 @@ Agentic System Overview:
 - Discussion Channel (John's AI Group): [https://discord.gg/bzp87AHJy5](https://discord.gg/bzp87AHJy5)
 - Video: https://www.youtube.com/watch?v=u1BHvKRnhYY
 
-- Related Repositories: TaskGen (https://github.com/simbianai/taskgen)
+- Related Repositories: TaskGen (https://github.com/simbianai/taskgen) - covers Base functionalities
     - TaskGen Paper: https://web3.arxiv.org/pdf/2407.15734
     - TaskGen Video: https://www.youtube.com/watch?v=F3usuxs2p1Y
 - Related Repositories: StrictJSON (https://github.com/tanchongmin/strictjson) [Do help star this as well!]
