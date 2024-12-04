@@ -3,6 +3,6 @@ We accept contributions for implementing external functions, as well as Jupyter 
 Help us make AgentJo accessible for everyone with more boilerplate code :)
 
 - Fun_AgentJo_Projects - For Jupyter Notebooks / projects that use AgentJo for something fun
-- Demo - For Jupyter notebooks / projects for demo purposes
+- Demo - For Jupyter notebooks / projects for demo purposes for potential industry use cases
 - AgentWrapper - For Wrapper functions that augment the Agent's base functionalities
 - Memory - For Memory implementations
