@@ -8,7 +8,7 @@ Road Map (Currently at Alpha):
 Agentic System Overview:
 ![AgentJo Overview](./resources/TaskGen_Overview.png)
 
-- Discussion Channel (John's AI Group): [https://discord.gg/bzp87AHJy5](https://discord.gg/bzp87AHJy5)
+- Discussion Channel + AgentJo Logo Design Competition (John's AI Group): [https://discord.gg/bzp87AHJy5](https://discord.gg/bzp87AHJy5)
 - Video: https://www.youtube.com/watch?v=u1BHvKRnhYY
 
 - Related Repositories: TaskGen (https://github.com/simbianai/taskgen) - covers Base functionalities
