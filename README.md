@@ -19,6 +19,17 @@ Agentic System Overview:
 Outreach / Consultancy Services:
 - As part of our outreach efforts, we are actively providing consultation services to integrate AgentJo into your production pipelines. Contact [John](https://www.linkedin.com/in/john-chong-min-tan-94652288/) or [Brian](https://www.linkedin.com/in/brianlimyisheng/) or [Richard Cottrill](https://www.linkedin.com/in/richardc/) to schedule an appointment!
 
+- DM for a free 15-30 min consultation! No obligations, just help to star/promote the AgentJo / StrictJSON repo if you like it!
+
+### Please Note Below for Consultation Terms ###
+In the spirit of open source:
+- The consultation notebook that I live code for the free 15-30 min session may be open-sourced, so please do not show me your confidential stuff / tell me about your confidential use cases
+- If you would like to engage me to develop a prototype, the broad framework used (minus use-case specific secret-sauce prompts and confidential data) may be open-sourced as well, taking into full regard not disclosing anything detrimental to your operations (we can discuss more - the idea is to open source most components and non-use-case-specific workflows so others can use)
+
+Do note that these terms are there so that I do not get IP-blocked in how AgentJo is developed, which is very important for the 5-10 years plan. I hope you understand :)
+
+### End of Consultation Terms ###
+
 ### Acknowledgements
 - Idea for AgentJo was built over 5 years (2019 - 2024) during John's PhD, guided by Prof. Mehul Motani
 - Initial version of AgentJo (TaskGen) was done during John's time at Simbian (Feb - Oct 2024), alongside talented individuals such as Prince Saroj, Brian Lim, Richard Cottrill, Bharat Runwal, Hardik
