@@ -23,6 +23,7 @@ Outreach / Consultancy Services:
 
 ### Please Note Below for Consultation Terms
 ++++++
+
 In the spirit of open source:
 - The consultation notebook that I live code for the free 15-30 min session may be open-sourced, so please do not show me your confidential stuff / tell me about your confidential use cases
 - If you would like to engage me to develop a prototype, the broad framework used (minus use-case specific secret-sauce prompts and confidential data) may be open-sourced as well, taking into full regard not disclosing anything detrimental to your operations (we can discuss more - the idea is to open source most components and non-use-case-specific workflows so others can use)
