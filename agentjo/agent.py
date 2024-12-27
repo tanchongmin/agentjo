@@ -500,6 +500,18 @@ End Task if Assigned Task is completed.''',
         
         return res
 
+    ## this gets the agent to answer based on a certain output_format
+    def answer(self, query, output_format = {'Answer': 'Concise Answer'}):
+        ''' This answers the user based on output_format
+        query (str): The question the user wants to ask
+        output_format (dict): The output format in a dictionary'''
+
+        return self.query(
+f'''Answer the following query according to the subtasks completed: ```{query}```\n
+Subtasks Completed: ```{self.subtasks_completed}```
+Be concise and just give the answer with no explanation required.''', 
+                               output_format = output_format)
+
     def run(self, task: str = '', overall_task: str = '', num_subtasks: int = 0) -> list:
         ''' Attempts to do the task using LLM and available functions
         Loops through and performs either a function call or LLM call up to num_subtasks number of times
@@ -507,11 +519,6 @@ End Task if Assigned Task is completed.''',
             
         # Assign the task
         if task != '':
-            ### TODO: Add in Planner here to split the task into steps if sequential generation is required
-            ### Planner can also infuse diverse views if the task is more creative
-            ### Planner can also be rule-based like MCTS if it is an explore-exploit RL-style problem
-            ### Planner can also be rule-based shortest path algo if it is a navigation problem
-            
             self.task_completed = False
             # If meta agent's task is here as well, assign it too
             if overall_task != '':
@@ -577,88 +584,89 @@ End Task if Assigned Task is completed.''',
         self.assign_functions([agent.to_function(self) for agent in agent_list])
         return self
     
+    ## Credit: sebbecht
     def wrap_function(self, func, before_hook: list = [], after_hook: list = []):
-                """
-                Wraps a base agent function with hooks to be forcefully executed before and after the base function. 
-                Hooks are executed in the order they are passed in.
-                Hooks do not become part of the agent's assigned functions.
+        """
+        Wraps a base agent function with hooks to be forcefully executed before and after the base function. 
+        Hooks are executed in the order they are passed in.
+        Hooks do not become part of the agent's assigned functions.
+        
+        Args:
+            func: The base agent function to wrap. Can be any agent's internal function like run, reply_user
+            before_hook: List of callable functions to execute before the base function
+            after_hook: List of callable functions to execute after the base function
+        """
+        # Make sure use_function is not wrapped as it will cause infinite loops
+        if func == 'use_function':
+            raise Exception("use_function cannot be wrapped")
+        
+        # if functions are not already Function objects, convert all hooks to Function objects. If they are BaseAgent, convert them to Function objects
+        before_hook = [hook.to_function(self) if isinstance(hook, BaseAgent) else Function(external_fn=hook) for hook in before_hook]
+        after_hook = [hook.to_function(self) if isinstance(hook, BaseAgent) else Function(external_fn=hook) for hook in after_hook]
                 
-                Args:
-                    func: The base agent function to wrap
-                    before_hook: List of callable functions to execute before the base function
-                    after_hook: List of callable functions to execute after the base function
-                """
-                # Make sure use_function is not wrapped as it will cause infinite loops
-                if func == 'use_function':
-                    raise Exception("use_function cannot be wrapped")
-                
-                # if functions are not already Function objects, convert all hooks to Function objects. If they are BaseAgent, convert them to Function objects
-                before_hook = [hook.to_function(self) if isinstance(hook, BaseAgent) else Function(external_fn=hook) for hook in before_hook]
-                after_hook = [hook.to_function(self) if isinstance(hook, BaseAgent) else Function(external_fn=hook) for hook in after_hook]
-                        
-                def infer_function_parameters(function: Function):
-                    input_format = {}
-                    fn_description = function.fn_description
-                    matches = re.findall(r'<(.*?)>', fn_description)
+        def infer_function_parameters(function: Function):
+            input_format = {}
+            fn_description = function.fn_description
+            matches = re.findall(r'<(.*?)>', fn_description)
+            
+            # do up an output format dictionary to use to get LLM to output exactly based on keys and types needed
+            for match in matches:
+                if ':' in match:
+                    first_part, second_part = match.split(':', 1)
+                    input_format[first_part] = f'A suitable value, type: {second_part}'
+                else:
+                    input_format[match] = 'A suitable value'
                     
-                    # do up an output format dictionary to use to get LLM to output exactly based on keys and types needed
-                    for match in matches:
-                        if ':' in match:
-                            first_part, second_part = match.split(':', 1)
-                            input_format[first_part] = f'A suitable value, type: {second_part}'
-                        else:
-                            input_format[match] = 'A suitable value'
-                            
-                    # if there is no input, then do not need LLM to extract out function's input
-                    if input_format == {}:
-                        function_params = {}
-                            
-                    else:
-                        background_info = f"Assigned Task:```\n{self.task}\n```\nSubtasks Completed: ```{self.subtasks_completed}```"
-                        # Add in memory to the Agent
-                        rag_info = ''
-                        for name in self.memory_bank.keys():
-                            # Function RAG is done separately in self.query()
-                            if name == 'Function': continue
-                        rag_info += f'Knowledge Reference for {name}: ```{self.memory_bank[name].retrieve(self.task)}```\n'    
+            # if there is no input, then do not need LLM to extract out function's input
+            if input_format == {}:
+                function_params = {}
+                    
+            else:
+                background_info = f"Assigned Task:```\n{self.task}\n```\nSubtasks Completed: ```{self.subtasks_completed}```"
+                # Add in memory to the Agent
+                rag_info = ''
+                for name in self.memory_bank.keys():
+                    # Function RAG is done separately in self.query()
+                    if name == 'Function': continue
+                rag_info += f'Knowledge Reference for {name}: ```{self.memory_bank[name].retrieve(self.task)}```\n'    
 
-                        function_params = self.query(query = f'''{background_info}{rag_info}\n\n```\nEquipped Function Details: ```{str(function)}```\nOutput suitable values for Inputs to Equipped Function to fulfil Current Subtask\nInput fields are: {list(input_format.keys())}''',
-                                    output_format = input_format,
-                                    provide_function_list = False)
-                    return function_params
+                function_params = self.query(query = f'''{background_info}{rag_info}\n\n```\nEquipped Function Details: ```{str(function)}```\nOutput suitable values for Inputs to Equipped Function to fulfil Current Subtask\nInput fields are: {list(input_format.keys())}''',
+                            output_format = input_format,
+                            provide_function_list = False)
+            return function_params
+        
+        try:    
+            # Get the original base function
+            original_func = getattr(self, func)
+        except:
+            raise Exception(f"Base function: {func} not found in agent {self.agent_name}")
+        
+        def wrapped_function(*args, **kwargs):
+            # Special handling for run function to ensure task is assigned before hooks
+            if func == 'run' and len(args) > 0:
+                self.assign_task(args[0], args[1] if len(args) > 1 else '')
+            
+            # Execute before hooks
+            for hook in before_hook:
+                self.assign_functions([hook])
+                input_params = infer_function_parameters(hook)
+                self.use_function(hook.fn_name, input_params)
+                self.remove_function(hook.fn_name)
                 
-                try:    
-                    # Get the original base function
-                    original_func = getattr(self, func)
-                except:
-                    raise Exception(f"Base function: {func} not found in agent {self.agent_name}")
+            # Execute original function
+            result = original_func(*args, **kwargs)
+            
+            # Execute after hooks
+            for hook in after_hook:
+                self.assign_functions([hook])
+                input_params = infer_function_parameters(hook)
+                self.use_function(hook.fn_name, input_params)
+                self.remove_function(hook.fn_name)
                 
-                def wrapped_function(*args, **kwargs):
-                    # Special handling for run function to ensure task is assigned before hooks
-                    if func == 'run' and len(args) > 0:
-                        self.assign_task(args[0], args[1] if len(args) > 1 else '')
-                    
-                    # Execute before hooks
-                    for hook in before_hook:
-                        self.assign_functions([hook])
-                        input_params = infer_function_parameters(hook)
-                        self.use_function(hook.fn_name, input_params)
-                        self.remove_function(hook.fn_name)
-                        
-                    # Execute original function
-                    result = original_func(*args, **kwargs)
-                    
-                    # Execute after hooks
-                    for hook in after_hook:
-                        self.assign_functions([hook])
-                        input_params = infer_function_parameters(hook)
-                        self.use_function(hook.fn_name, input_params)
-                        self.remove_function(hook.fn_name)
-                        
-                    return result
-                
-                # Replace the original function with wrapped version
-                setattr(self, func, wrapped_function)
+            return result
+        
+        # Replace the original function with wrapped version
+        setattr(self, func, wrapped_function)
     
     ## Function aliaises
     assign_function = assign_functions
@@ -914,7 +922,7 @@ End Task if Assigned Task is completed.''',
                 res["Equipped Function Inputs"] = {}
                     
             else:    
-                res2 = await self.query(query = f'''{background_info}{rag_info}\n\nCurrent Subtask: ```{res["Current Subtask"]}```\nEquipped Function Details: ```{str(cur_function)}```\Output suitable values for Inputs to Equipped Function to fulfil Current Subtask\nInput fields are: {list(input_format.keys())}''',
+                res2 = await self.query(query = f'''{background_info}{rag_info}\n\nCurrent Subtask: ```{res["Current Subtask"]}```\nEquipped Function Details: ```{str(cur_function)}```\nOutput suitable values for Inputs to Equipped Function to fulfil Current Subtask\nInput fields are: {list(input_format.keys())}''',
                              output_format = input_format,
                              provide_function_list = False)
                 
@@ -954,6 +962,18 @@ End Task if Assigned Task is completed.''',
         
         return res
 
+    ## this gets the agent to answer based on a certain output_format
+    async def answer(self, query, output_format = {'Answer': 'Concise Answer'}):
+        ''' This answers the user based on output_format
+        query (str): The query the user wants to ask
+        output_format (dict): The output format in a dictionary'''
+        
+        return await self.query(
+f'''Answer the following query according to the subtasks completed: ```{query}```\n
+Subtasks Completed: ```{self.subtasks_completed}```
+Be concise and just give the answer with no explanation required.''', 
+                               output_format = output_format)
+
     async def run(self, task: str = '', overall_task: str = '', num_subtasks: int = 0) -> list:
         ''' Attempts to do the task using LLM and available functions
         Loops through and performs either a function call or LLM call up to num_subtasks number of times
@@ -961,11 +981,6 @@ End Task if Assigned Task is completed.''',
             
         # Assign the task
         if task != '':
-            ### TODO: Add in Planner here to split the task into steps if sequential generation is required
-            ### Planner can also infuse diverse views if the task is more creative
-            ### Planner can also be rule-based like MCTS if it is an explore-exploit RL-style problem
-            ### Planner can also be rule-based shortest path algo if it is a navigation problem
-            
             self.task_completed = False
             # If meta agent's task is here as well, assign it too
             if overall_task != '':
@@ -1010,6 +1025,90 @@ End Task if Assigned Task is completed.''',
                     print('### End of Auto-summary ###\n')
           
         return list(self.subtasks_completed.values())
+
+    ## Credit: sebbecht
+    async def wrap_function(self, func, before_hook: list = [], after_hook: list = []):
+        """
+        Wraps a base agent function with hooks to be forcefully executed before and after the base function. 
+        Hooks are executed in the order they are passed in.
+        Hooks do not become part of the agent's assigned functions.
+        
+        Args:
+            func: The base agent function to wrap. Can be any agent's internal function like run, reply_user
+            before_hook: List of callable functions to execute before the base function
+            after_hook: List of callable functions to execute after the base function
+        """
+        # Make sure use_function is not wrapped as it will cause infinite loops
+        if func == 'use_function':
+            raise Exception("use_function cannot be wrapped")
+        
+        # if functions are not already Function objects, convert all hooks to Function objects. If they are BaseAgent, convert them to Function objects
+        before_hook = [hook.to_function(self) if isinstance(hook, BaseAgent) else AsyncFunction(external_fn=hook) for hook in before_hook]
+        after_hook = [hook.to_function(self) if isinstance(hook, BaseAgent) else AsyncFunction(external_fn=hook) for hook in after_hook]
+                
+        async def infer_function_parameters(function: Function):
+            input_format = {}
+            fn_description = function.fn_description
+            matches = re.findall(r'<(.*?)>', fn_description)
+            
+            # do up an output format dictionary to use to get LLM to output exactly based on keys and types needed
+            for match in matches:
+                if ':' in match:
+                    first_part, second_part = match.split(':', 1)
+                    input_format[first_part] = f'A suitable value, type: {second_part}'
+                else:
+                    input_format[match] = 'A suitable value'
+                    
+            # if there is no input, then do not need LLM to extract out function's input
+            if input_format == {}:
+                function_params = {}
+                    
+            else:
+                background_info = f"Assigned Task:```\n{self.task}\n```\nSubtasks Completed: ```{self.subtasks_completed}```"
+                # Add in memory to the Agent
+                rag_info = ''
+                for name in self.memory_bank.keys():
+                    # Function RAG is done separately in self.query()
+                    if name == 'Function': continue
+                rag_info += f'Knowledge Reference for {name}: ```{self.memory_bank[name].retrieve(self.task)}```\n'    
+
+                function_params = await self.query(query = f'''{background_info}{rag_info}\n\n```\nEquipped Function Details: ```{str(function)}```\nOutput suitable values for Inputs to Equipped Function to fulfil Current Subtask\nInput fields are: {list(input_format.keys())}''',
+                            output_format = input_format,
+                            provide_function_list = False)
+            return function_params
+        
+        try:    
+            # Get the original base function
+            original_func = getattr(self, func)
+        except:
+            raise Exception(f"Base function: {func} not found in agent {self.agent_name}")
+        
+        async def wrapped_function(*args, **kwargs):
+            # Special handling for run function to ensure task is assigned before hooks
+            if func == 'run' and len(args) > 0:
+                self.assign_task(args[0], args[1] if len(args) > 1 else '')
+            
+            # Execute before hooks
+            for hook in before_hook:
+                self.assign_functions([hook])
+                input_params = await infer_function_parameters(hook)
+                await self.use_function(hook.fn_name, input_params)
+                self.remove_function(hook.fn_name)
+                
+            # Execute original function
+            result = await original_func(*args, **kwargs)
+            
+            # Execute after hooks
+            for hook in after_hook:
+                self.assign_functions([hook])
+                input_params = await infer_function_parameters(hook)
+                await self.use_function(hook.fn_name, input_params)
+                self.remove_function(hook.fn_name)
+                
+            return result
+        
+        # Replace the original function with wrapped version
+        setattr(self, func, wrapped_function)
     
     ## This is for Multi-Agent uses
     def to_function(self, meta_agent):

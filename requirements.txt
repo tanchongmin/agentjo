@@ -10,3 +10,4 @@ xlrd
 chromadb>=0.5.2
 asyncio
 coverage>=7.6.8,<8
+sentence_transformers

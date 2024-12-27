@@ -1,3 +1,9 @@
+27 Dec 2024 (v0.02)
+- Added an `answer` function for Agent, that allows user to ask a query and get a response in the desired `output_format` (see updated Tutorial 1)
+- Added a `wrapp_function` that enables creating function hooks before and after the agent's internal function call such as `run`, `get_next_subtask` (credit: sebbecht). This can modify the behaviour of the agent for the overall task, as well as for each subtask. (see Advanced Tutorial 1)
+- Added SentenceTransformer embeddings for Ranker if OpenAI key is not given (credit: helloworld53)
+This method, however, is still slow and it is still best to override the ranker's client with embedding function (future improvement: directly expose the embedder to the Agent itself)
+
 20 Oct 2024 (v0.0.1)
 - TaskGen now rebranded as AgentJo to denote the beginning of focus on agentic wrappers, outside-of-agent workflows, multi-agent worflows
 - Added road map of AgentJo to the README.md
