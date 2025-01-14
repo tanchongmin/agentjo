@@ -8,7 +8,7 @@ This script demonstrates a simple conversational agent that can engage in person
 - Supports custom functions for generating sentences with specific words and styles
 ## Prerequisites
 - Python 3.10
-- taskgen library
+- agentjo library
 - python-dotenv library
 - OpenAI API key
 ## Setup
