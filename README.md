@@ -35,7 +35,7 @@ Do note that these terms are there so that I do not get IP-blocked in how AgentJ
 ### Acknowledgements
 - Idea for AgentJo was built over 5 years (2019 - 2024) during John's PhD, guided by Prof. Mehul Motani
 - Initial version of AgentJo (TaskGen) was done during John's time at Simbian (Feb - Oct 2024), alongside talented individuals such as Prince Saroj, Brian Lim, Richard Cottrill, Bharat Runwal, Hardik
-- API keys were sponsored by Yanok and Ajentik AI for AgentJo development from Nov 2024 - Jan 23 2025
+- LLM API keys were sponsored by Yanok and Ajentik AI from Nov 2024 - Jan 23 2025
 
 ### Creator's Preamble
 Happy to share that we are beginning the phase to augment agents and incorporate them in larger systems.
