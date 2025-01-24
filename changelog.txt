@@ -1,3 +1,6 @@
+25 Jan 2025 (v0.0.4)
+- Removed sentence_transformers as dependency for faster install times
+
 24 Jan 2025 (v0.0.3)
 - Removed chromadb integration for memory (and also updated Tutorial 2 to remove chromadb memory). This is because the new preferred integration for this is to use a memory retrieval function directly to the Agent, rather than setting up a memory bank at the Agent level.
 - Removed chromadb, asyncio dependency for faster install times

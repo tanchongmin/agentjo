@@ -7,4 +7,3 @@ PyPDF2
 python-docx
 pandas
 xlrd
-sentence_transformers
