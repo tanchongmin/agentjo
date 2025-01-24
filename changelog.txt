@@ -1,4 +1,4 @@
-24 Jan 2025 (v0.03)
+24 Jan 2025 (v0.0.3)
 - Removed chromadb integration for memory (and also updated Tutorial 2 to remove chromadb memory). This is because the new preferred integration for this is to use a memory retrieval function directly to the Agent, rather than setting up a memory bank at the Agent level.
 - Removed chromadb, asyncio dependency for faster install times
 - Updated Tutorials to use .env so as to minimise private API key leak: ```from dotenv import load_dotenv
@@ -6,7 +6,7 @@ load_dotenv()```
 - Setup your own .env with the required API keys to use your LLM
 - Added Advanced Tutorial 1 to main directory for easy access
 
-27 Dec 2024 (v0.02)
+27 Dec 2024 (v0.0.2)
 - Added an `answer` function for Agent, that allows user to ask a query and get a response in the desired `output_format` (see updated Tutorial 1)
 - Added a `wrap_function` that enables creating function hooks before and after the agent's internal function call such as `run`, `get_next_subtask` (credit: sebbecht). This can modify the behaviour of the agent for the overall task, as well as for each subtask. (see Advanced Tutorial 1)
 - Added SentenceTransformer embeddings for Ranker if OpenAI key is not given (credit: helloworld53)
