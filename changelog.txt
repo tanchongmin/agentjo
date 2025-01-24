@@ -5,6 +5,7 @@
 load_dotenv()```
 - Setup your own .env with the required API keys to use your LLM
 - Added Advanced Tutorial 1 to main directory for easy access
+- Revamped Tutorials 0 - 6 to remove / fix examples which were not working, and simplified some examples
 
 27 Dec 2024 (v0.0.2)
 - Added an `answer` function for Agent, that allows user to ask a query and get a response in the desired `output_format` (see updated Tutorial 1)
