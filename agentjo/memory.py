@@ -4,12 +4,9 @@ import hashlib
 import os
 import time
 from typing import Any
-import PyPDF2
-from docx import Document
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 import copy
-
 import pandas as pd
+
 from abc import ABC, abstractmethod
 
 from agentjo.base import strict_json
@@ -61,6 +58,7 @@ class MemoryTemplate(ABC):
             )
 
         if not text_splitter:
+            from langchain_text_splitters import RecursiveCharacterTextSplitter
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size=500,
                 chunk_overlap=100,
@@ -74,6 +72,8 @@ class MemoryTemplate(ABC):
         return memories
 
     def read_pdf(self, filepath):
+        import PyPDF2
+
         # Open the PDF file
         text_list = []
         with open(filepath, "rb") as file:
@@ -87,6 +87,7 @@ class MemoryTemplate(ABC):
         return "\n".join(text_list)
 
     def read_docx(self, filepath):
+        from docx import Document
         doc = Document(filepath)
         text_list = []
         for para in doc.paragraphs:

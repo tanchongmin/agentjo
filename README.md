@@ -1,4 +1,4 @@
-# AgentJo v0.0.4
+# AgentJo v0.0.5
 ### Towards Human-Friendly, Fast Learning and Adaptable Agent Communities
 #### An Open Source Initiative Led by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
 #### This is John's dream to create fast learning and adaptable agents
@@ -68,8 +68,9 @@ I can't wait to see what this new framework can do for you!
 
 ## How do I use this? 
 1. Download package via command line ```pip install agentjo```
-2. Set up your LLM and provide any API keys if needed
-3. Import the required functions from ```agentjo``` and use them!
+(For file reading capabilities in memory, use ```pip install agentjo[full]```)
+3. Set up your LLM and provide any API keys if needed
+4. Import the required functions from ```agentjo``` and use them!
 
 ## Differences in LLM for Agentic Framework
 - Default model is now gpt-4o-mini if you do not specify any LLM!

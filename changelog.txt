@@ -1,3 +1,8 @@
+27 Jan 2025 (v0.0.5)
+- Created a lite version of AgentJo where we only install the minimum required imports for the agent
+- Installation: Lite Version ```pip install agentjo```, Full Version ```pip install agentjo[full]```
+- Refactored memory.py to put the imports of file reading only in the relevant file read function, so we can have a lite package without these imports
+
 25 Jan 2025 (v0.0.4)
 - Removed sentence_transformers as dependency for faster install times
 

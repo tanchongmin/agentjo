@@ -1,6 +1,6 @@
 import inspect
-import numpy as np
 import os
+import numpy as np
 
 from agentjo.utils import ensure_awaitable
 
