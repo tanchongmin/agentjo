@@ -26,8 +26,7 @@ Outreach / Consultancy Services:
 - Initial version of AgentJo (TaskGen) was done during John's time at Simbian AI (Feb - Oct 2024), alongside talented individuals such as Prince Saroj, Brian Lim, Richard Cottrill, Bharat Runwal, Hardik
 - API key sponsorship for AgentJo's development is currently sponsored by:
     - Jostin Pte. Ltd. and Kent Ridge AI
- 
-A very big thank you to our past sponsors: Yanok, Ajentik AI, Simbian AI
+- A shoutout here too for our past sponsors: Yanok, Ajentik AI, Simbian AI
 
 ### Creator's Preamble
 Happy to share that we are beginning the phase to augment agents and incorporate them in larger systems.
