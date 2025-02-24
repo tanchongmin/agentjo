@@ -13,3 +13,5 @@
 - Preparation: In your .env file, add in the OPENAI_API_KEY, or the API keys of the LLM you are using
 
 - There is also an Images and Music folder
+
+- To run: Open the Game.ipynb and run the cell. Enjoy!
