@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage[style=apa, backend=biber]{biblatex}
+\addbibresource{references.bib}
+\title{Research Report: What is Memory?}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This report surveys various perspectives on memory, spanning biological, cognitive, and artificial systems. We explore the definition and types of memory, discuss the mechanisms that enable memory to be adaptive, detail the formation of memory schemas, and highlight future areas of research. Multiple viewpoints from recent and foundational works are integrated to provide a comprehensive picture of memory as a dynamic and multifaceted entity \parencite{kabir2024deepreinforcementlearningtimescale, wakeling2004adaptivityperlearning, hoppensteadt2020frequencyphasepotentialforcedstno, lakhman2012neuroevolutionresultsemergenceshortterm, neves2023volatilememorymotifsminimal, bai2022saliencyaugmentedmemorycompletioncontinual, jitsev2010experiencedrivenformationpartsbasedrepresentations, schillaci2020predictionerrordrivenmemoryconsolidation, rannentriki2024revisitingdynamicevaluationonline, banino2020memodeepnetworkflexible}.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+Memory is a core mechanism by which systems, both biological and artificial, encode, store, and retrieve information. In biological terms, it is central to learning from experience, decision making, and survival \parencite{wakeling2004adaptivityperlearning, jitsev2010experiencedrivenformationpartsbasedrepresentations}. In artificial learning systems, memory underpins the ability of models to understand temporal sequences and complex patterns \parencite{kabir2024deepreinforcementlearningtimescale, rannentriki2024revisitingdynamicevaluationonline}. This report examines these dimensions by addressing different types of memory, its adaptive properties, the construction of memory schemas and future research directions.
+
+\subsection{Background and Motivation}
+Recent research has shown that drawing inspiration from brain dynamics (e.g., synaptic plasticity and hierarchical representations) can enhance artificial memory systems \parencite{banino2020memodeepnetworkflexible, schillaci2020predictionerrordrivenmemoryconsolidation}. The multidisciplinary perspective not only provides theoretical insight but also practical methodologies for improving machine intelligence.
+
+\section{Types of Memory}
+\label{sec:types}
+Memory is not a monolithic concept; rather, it has various forms depending on the system and context.
+
+\subsection{Biological Memory Systems}
+Biological memory includes mechanisms such as long-term potentiation (LTP) and long-term depression (LTD) that modulate synaptic strength \parencite{wakeling2004adaptivityperlearning}. Parts-based representations in the visual cortex, as described by \textcite{jitsev2010experiencedrivenformationpartsbasedrepresentations}, highlight how local and global processing combine to form robust memories. Furthermore, episodic memory, a type of memory storing experiences, serves as a key component in planning and decision-making \parencite{schillaci2020predictionerrordrivenmemoryconsolidation}.
+
+\subsection{Artificial Memory Architectures}
+In the realm of artificial intelligence, memory is implemented in various architectures. Traditional recurrent neural networks (RNNs) and Long Short-Term Memory (LSTM) networks provide the basic framework \parencite{lakhman2012neuroevolutionresultsemergenceshortterm}. Recent innovations such as scale invariant memory systems \parencite{kabir2024deepreinforcementlearningtimescale} and saliency-augmented memory for continual learning \parencite{bai2022saliencyaugmentedmemorycompletioncontinual} have expanded the toolkit available for handling temporal and complex data. Even transformer models distinguish between weight memory and activation (context) memory \parencite{rannentriki2024revisitingdynamicevaluationonline}.
+
+\subsection{Physical and Neuromorphic Perspectives}
+Beyond network models, physical systems such as oscillator networks can store information via potential landscapes \parencite{hoppensteadt2020frequencyphasepotentialforcedstno}. Meanwhile, minimal spiking neural networks reveal how volatile memory can be harnessed in neuromorphic settings \parencite{neves2023volatilememorymotifsminimal}.
+
+\section{How Memory can be Adaptive}
+\label{sec:adaptive}
+Adaptivity in memory is crucial for coping with dynamic and non-stationary environments. Adaptive memory systems dynamically adjust their stored representations in response to incoming information.
+
+\subsection{Adaptivity in Biological Systems}
+Biological systems exhibit memory adaptability through mechanisms such as synaptic plasticity and homeostatic regulation \parencite{wakeling2004adaptivityperlearning, jitsev2010experiencedrivenformationpartsbasedrepresentations}. These processes ensure that memory remains flexible, enabling organisms to update or even discard old memories in light of new experiences.
+
+\subsection{Adaptive Mechanisms in Artificial Systems}
+In artificial neural networks, adaptivity can be achieved by mechanisms such as online adaptation and dynamic evaluation \parencite{rannentriki2024revisitingdynamicevaluationonline}. Systems utilizing scale invariant memory \parencite{kabir2024deepreinforcementlearningtimescale} demonstrate that proportional shifts in the temporal representation enhance robustness. Further, neuroevolution methods allow for the emergence of short-term memory tailored to goal-directed behaviors \parencite{lakhman2012neuroevolutionresultsemergenceshortterm}.
+
+\subsection{Physical Adaptivity}
+In oscillator networks, external forcing reorganizes the potential landscape, thus enabling the adaptive shifting of memory valleys \parencite{hoppensteadt2020frequencyphasepotentialforcedstno}. This property ensures that even physical models of memory can adjust based on varying environmental inputs.
+
+\section{How Memory Schema is Created}
+\label{sec:schema}
+Memory schemas refer to the structured organization of information, which facilitates efficient retrieval and processing.
+
+\subsection{Constructing Memory in Artificial Networks}
+In many modern architectures, memory schemas are established via layered processing. For example, scale invariant memory schemas are built using a first layer that computes a Laplace transform of the input signal and a second dense layer that approximates an inverse Laplace transform \parencite{kabir2024deepreinforcementlearningtimescale}. Similarly, the MEMO architecture builds episodic memory by embedding inputs into a common vector space and using multi-hop attention to retrieve them \parencite{banino2020memodeepnetworkflexible}.
+
+\subsection{Biologically Inspired Schemas}
+Biological models suggest that schema formation involves competitive dynamics between synaptic connections \parencite{wakeling2004adaptivityperlearning, jitsev2010experiencedrivenformationpartsbasedrepresentations}. The self-organizing processes guided by both bottom-up and top-down interactions result in robust memory traces which evolve over time.
+
+\subsection{Physical Implementations}
+In physical oscillator networks, memory schema formation is viewed through the lens of potential landscapes. Valleys in amplitude and phase potentials represent stable states that encode specific memories \parencite{hoppensteadt2020frequencyphasepotentialforcedstno}.
+
+\section{Future Focus Areas on Memory}
+\label{sec:future}
+Future research in memory spans multiple disciplines, focusing on scalability, efficiency, and enhanced adaptability.
+
+\subsection{Enhancing Adaptability and Robustness}
+Research could integrate adaptive mechanisms in memory systems; for example, combining scale invariant temporal discounting with online adaptation \parencite{kabir2024deepreinforcementlearningtimescale, rannentriki2024revisitingdynamicevaluationonline}. Further work should address the balance between stability and plasticity especially within continual learning frameworks \parencite{schillaci2020predictionerrordrivenmemoryconsolidation, bai2022saliencyaugmentedmemorycompletioncontinual}.
+
+\subsection{Developing Hierarchical and Invariant Representations}
+Learning models may benefit from improved parts-based representations that exhibit transformation invariance, as highlighted in studies on visual memory \parencite{jitsev2010experiencedrivenformationpartsbasedrepresentations}. A deeper integration of insights from neuroscience could lead to better architectural designs in both artificial and neuromorphic systems.
+
+\subsection{Scalability and Energy Efficiency}
+The integration of minimal memory motifs in neuromorphic circuits \parencite{neves2023volatilememorymotifsminimal} offers promising routes for energy-efficient adaptive memory. Future research might explore larger networks that combine local memory modules with global dynamics.
+
+\section{Conclusion}
+\label{sec:conclusion}
+In conclusion, memory remains a multifaceted and dynamic phenomenon across both natural and artificial systems. The integration of ideas from neuroscience, physics, and machine learning has led to innovative architectures that capture various aspects of memory from encoding to retrieval. Adaptive mechanisms like online updating and dynamic evaluation ensure that memory systems remain robust in fluctuating environments. Meanwhile, the formation of memory schemas through layered architectures and self-organizing processes provides a blueprint for both biological evolution and artificial intelligence. Future work in this interdisciplinary field promises both deeper theoretical insights and practical applications that span from neuromorphic computing to robust deep learning models.
+
+\printbibliography
+
+\end{document}
