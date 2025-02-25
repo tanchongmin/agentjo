@@ -22,10 +22,15 @@
 
 You can also customise your game. Example prompts:
 ## MasterChef
+Prompt:
+```
 MasterChef Game - You are a chef competing in MasterChef and you seek to impress Gordon Ramsay, one of the judges, so that you may win first place.
+```
 ![images](masterchef.jpeg)
 
 ## Evolution Game
+Prompt:
+```
 Evolution Game - The game only has two types of options: Choose Ability or Evolve
 Player can either choose new abilities for the current organism, or evolve into a new one.
 This is meant to be a documentary-style exploration - use realistic organism names and abilities.
@@ -33,4 +38,5 @@ Make the exploration full of wonder and possibilities.
 The player starts as pieces of nucleotides, and evolves to a human, and then superhuman and beyond. 
 Make the emotion neutral, calm or scared only.
 Make the location reflect where the organism can live and the name of the organism in the form Location: <location: organism name>
+```
 ![images](evolution_game.jpeg)
