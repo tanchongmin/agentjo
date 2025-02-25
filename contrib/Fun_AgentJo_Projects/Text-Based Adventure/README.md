@@ -10,7 +10,7 @@
 
 - Text and image will be generated at each step
 
-- If you do not want the image generation, then choose Default Stock Image
+- If you do not want the image generation, then choose "Use Default Image"
 
 - Preparation: In your .env file, add in the OPENAI_API_KEY, or the API keys of the LLM you are using
 
