@@ -1,4 +1,6 @@
 # Interactive Text Game
+{game_view.png}
+
 - Created: 24 Feb 2025
 
 - You can come up with your own scenario, and the game will give you 3 options to choose to advance the story
