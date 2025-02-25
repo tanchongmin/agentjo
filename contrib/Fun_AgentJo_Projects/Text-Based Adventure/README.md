@@ -1,5 +1,5 @@
 # Interactive Text Game
-{game_view.png}
+![images](game_view.png)
 
 - Created: 24 Feb 2025
 
