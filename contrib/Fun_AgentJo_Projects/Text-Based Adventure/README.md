@@ -1,16 +1,16 @@
 # Interactive Text Game
-Customise your adventure with prompts that cater to your interests!
+Customise your adventure with scenarios that cater to your interests!
 Example: 
 
 ## MasterChef
-Prompt:
+Scenario Prompt:
 ```
 MasterChef Game - You are a chef competing in MasterChef and you seek to impress Gordon Ramsay, one of the judges, so that you may win first place.
 ```
 ![images](masterchef.jpeg)
 
 ## Evolution Game
-Prompt:
+Scenario Prompt:
 ```
 Evolution Game - The game only has two types of options: Choose Ability or Evolve
 Player can either choose new abilities for the current organism, or evolve into a new one.
