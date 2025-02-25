@@ -14,6 +14,8 @@
 
 - Preparation: In your .env file, add in the OPENAI_API_KEY, or the API keys of the LLM you are using
 
+- If you would like to use Pixabay image search instead of generation, add in the PIXABAY_API_KEY in .env. You can get an API key here: <a href = "https://www.pixabay.com/"> https://pixabay.com/ </a>
+
 - There is also an Images and Music folder
 
 - To run: Open the Game.ipynb and run the cell. Enjoy!
