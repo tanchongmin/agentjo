@@ -2,6 +2,15 @@
 Customise your adventure with scenarios that cater to your interests!
 Example: 
 
+## Three Body Problem:
+Scenario Prompt:
+```
+You are now one of the Wall Facers in the Three-body problem.
+Come up with a plan to defend Earth against the aliens without them knowing.
+The options should be strategic and with significant technology imbued into them.
+```
+![images](three_body.jpeg)
+
 ## MasterChef
 Scenario Prompt:
 ```
