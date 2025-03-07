@@ -1,4 +1,5 @@
 <img src="Game/map.png" alt="Game Map" width="200"/>
+<img src="Game/PokeAgent.png" alt="PokeAgent" width="200"/>
 Collaborators: Dylan Chia, Dylan Tan, Nicholas Tan, Nicholas Chen, John Tan Chong Min
 
 - This project is inspired by Claude Plays Pokemon (https://www.twitch.tv/claudeplayspokemon).
