@@ -7,7 +7,7 @@ Collaborators: Dylan Chia, Dylan Tan, Nicholas Tan, Nicholas Chen, John Tan Chon
 - This project is inspired by Claude Plays Pokemon (https://www.twitch.tv/claudeplayspokemon).
 - Project is championed by members of Kent Ridge AI group (under Prof. Mehul Motani) + external collaborators
 
-We feel that the key to learning is in how we consolidate and retrieve memory, and so this is a project to see how far we can push the Agent to learn and play the game on its own.
+We believe that the key to learning is in how we consolidate and retrieve memory, and so this is a project to see how far we can push the Agent to learn and play the game on its own.
 
 We're using PokeAgent [https://github.com/DaDevChia/Pokeagent_new](https://github.com/DaDevChia/Pokeagent_new) as the base template to host an API interface for POST and GET requests to the game.
 
