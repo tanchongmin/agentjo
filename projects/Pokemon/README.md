@@ -1,5 +1,5 @@
 <div style="display: flex;">
-  <img src="Game/map1.png" alt="Game Map" width="200"/>
+  <img src="Game/map1.png" alt="Game Map" width="400"/>
   <img src="Game/PokeAgent.png" alt="PokeAgent" width="200"/>
 </div>
 Collaborators: Dylan Chia, Dylan Tan, Nicholas Tan, Nicholas Chen, John Tan Chong Min
