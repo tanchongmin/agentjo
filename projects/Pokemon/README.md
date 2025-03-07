@@ -1,6 +1,7 @@
 Collaborators: Dylan Chia, Dylan Tan, Nicholas Tan, Nicholas Chen, John Tan Chong Min
 
 - This project is inspired by Claude Plays Pokemon (https://www.twitch.tv/claudeplayspokemon).
+- Project is championed by members of Kent Ridge AI group (under Prof. Mehul Motani) + external collaborators
 
 We feel that the key to learning is in how we consolidate and retrieve memory, and so this is a project to see how far we can push the Agent to learn and play the game on its own.
 
