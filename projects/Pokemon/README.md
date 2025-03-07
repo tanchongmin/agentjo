@@ -1,4 +1,4 @@
-![Game Map](Game/map.png){width=20px}
+![Game Map](Game/map.png){ width=20px }
 Collaborators: Dylan Chia, Dylan Tan, Nicholas Tan, Nicholas Chen, John Tan Chong Min
 
 - This project is inspired by Claude Plays Pokemon (https://www.twitch.tv/claudeplayspokemon).
