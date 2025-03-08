@@ -11,8 +11,8 @@ Agentic System Overview:
 - Discussion Channel + AgentJo Logo Design Competition (John's AI Group): [https://discord.gg/bzp87AHJy5](https://discord.gg/bzp87AHJy5)
 - Video: https://www.youtube.com/watch?v=u1BHvKRnhYY
 
-- TaskGen/AgentJo Paper: https://web3.arxiv.org/pdf/2407.15734
-- TaskGen/AgentJo Video: https://www.youtube.com/watch?v=F3usuxs2p1Y
+- AgentJo/TaskGen Paper: https://web3.arxiv.org/pdf/2407.15734
+- AgentJo/TaskGen Video: https://www.youtube.com/watch?v=F3usuxs2p1Y
 - Related Repositories: StrictJSON (https://github.com/tanchongmin/strictjson) [Do help star this as well!]
 
 ### Acknowledgements
