@@ -16,11 +16,6 @@ Agentic System Overview:
     - TaskGen Video: https://www.youtube.com/watch?v=F3usuxs2p1Y
 - Related Repositories: StrictJSON (https://github.com/tanchongmin/strictjson) [Do help star this as well!]
 
-Outreach / Consultancy Services:
-- As part of our outreach efforts, we are actively providing consultation services to integrate AgentJo into your production pipelines. Contact [John](https://www.linkedin.com/in/john-chong-min-tan-94652288/) or [Brian](https://www.linkedin.com/in/brianlimyisheng/) or [Richard Cottrill](https://www.linkedin.com/in/richardc/) to schedule an appointment!
-
-- DM for a free 15-30 min consultation! No obligations, just help to star/promote the AgentJo / StrictJSON repo if you like it!
-
 ### Acknowledgements
 - Idea for AgentJo was built over 5 years (2019 - 2024) during John's PhD, guided by Prof. Mehul Motani
 - Initial version of AgentJo (TaskGen) was done during John's time at Simbian AI (Feb - Oct 2024), alongside talented individuals such as Prince Saroj, Brian Lim, Richard Cottrill, Bharat Runwal, Hardik
