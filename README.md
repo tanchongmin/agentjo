@@ -12,8 +12,8 @@ Agentic System Overview:
 - Video: https://www.youtube.com/watch?v=u1BHvKRnhYY
 
 - Related Repositories: TaskGen (https://github.com/simbianai/taskgen) - covers Base functionalities
-    - TaskGen Paper: https://web3.arxiv.org/pdf/2407.15734
-    - TaskGen Video: https://www.youtube.com/watch?v=F3usuxs2p1Y
+    - TaskGen/AgentJo Paper: https://web3.arxiv.org/pdf/2407.15734
+    - TaskGen/AgentJo Video: https://www.youtube.com/watch?v=F3usuxs2p1Y
 - Related Repositories: StrictJSON (https://github.com/tanchongmin/strictjson) [Do help star this as well!]
 
 ### Acknowledgements
@@ -66,11 +66,9 @@ I can't wait to see what this new framework can do for you!
 3. Set up your LLM and provide any API keys if needed
 4. Import the required functions from ```agentjo``` and use them!
 
-## Differences in LLM for Agentic Framework
-- Default model is now gpt-4o-mini if you do not specify any LLM!
-- Weaker models like ChatGPT (gpt-3.5-turbo) and Llama 3 8B are consistent only if you specify very clearly what you want the Agent to do and give examples of what you want
-- gpt-4o-mini, gpt-4o, Llama 3 70B and more advanced models can perform better zero-shot without much examples
-- AgentJo is compatible with ChatGPT and similar models, but for more robust use, consider using gpt-4o-mini and better models
+## Recommendation for LLM for Agentic Framework
+- Default model is now gpt-4o-mini
+- Thinking models like gpt-o3-mini, gemini-2.0-flash-thinking-exp can be used as well, but many times just adding a "Thoughts" in the `output_format` will suffice and is quicker to process
 
 # 1. Agent Basics
 - Create an agent by entering your agent's name and description
@@ -347,8 +345,8 @@ agent = Agent('Inventory Manager',
 - These extend the baseline features of AgentJo and you are encouraged to take a look at the Tutorials for more information.
 
 # Known Limitations
-- `gpt-3.5-turbo` is not that great with mathematical functions for Agents. Use `gpt-4o-mini` or better for more consistent results
-- `gpt-3.5-turbo` is not that great with Memory (Tutorial 3). Use `gpt-4o-mini` or better for more consistent results
+- For `gpt-4o`, sometimes the JSON is output as ` by the model. We will work on fixing this in StrictJSON directly.
+- There is an ongoing beta testing of YAML parsing (more efficient and reliable) using the parse_yaml function in StrictJSON repo. When it is more stable, it will be ported over to AgentJo repo as well.
 
 # Contributing to the project
 
