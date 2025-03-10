@@ -1,3 +1,3 @@
-This contains sample code of how to do multimodal (image + text) processing for the game world in AgentJo.
-Main_Game_Logic latest version is the code that will be used to run the livestream.
-Livestream is at: https://www.youtube.com/live/L9j8_lo7QUc
+- This contains sample code of how to do multimodal (image + text) processing for the game world in AgentJo.
+- `Main_Game_Logic` latest version is the code that will be used to run the livestream.
+- Livestream is at: https://www.youtube.com/live/L9j8_lo7QUc
