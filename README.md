@@ -1,4 +1,6 @@
 # AgentJo v0.0.5
+![AgentJo Logo](./logo/agentjo_logo.png) (Logo Designer: Boddhu Sri Pavan)
+
 ### Towards Human-Friendly, Fast Learning and Adaptable Agent Communities
 #### An Open Source Initiative Led by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
 #### This is John's dream to create fast learning and adaptable agents
