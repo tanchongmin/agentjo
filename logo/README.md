@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>AgentJo Logo Design Competition</title>
 </head>
 <body>
 
