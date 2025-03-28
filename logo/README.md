@@ -10,7 +10,7 @@
   AgentJo is John's project for the next 5 – 10 years to create fast learning and adaptable agents!
 </p>
 <p>
-  To reflect this ideology, we had a logo design competition, which ended on 11 Mar 2025, 2359hrs (GMT+8).<br>
+  To reflect this ideology, we had a logo design competition, which ended on 11 Mar 2025, 2359hrs (GMT+8).<br></br>
   <strong>Winner: Boddhu Sri Pavan</strong>
 </p>
 
