@@ -27,7 +27,7 @@
     </td>
   </tr>
   <tr>
-    <td style="background-color: gold; text-align: center; padding: 10px;">
+    <td style="background-color: blue; text-align: center; padding: 10px;">
       <strong>Boddhu Sri Pavan</strong> (winner)
     </td>
     <td style="text-align: center; padding: 10px;">
