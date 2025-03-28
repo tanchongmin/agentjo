@@ -10,13 +10,13 @@
 <table style="border-collapse: collapse; margin: auto;">
   <tr>
     <td style="text-align: center; padding: 10px;">
-      <img src="agentjo_logo.webp" width="200" alt="Logo 1">
+      <img src="agentjo_logo.png" width="200" alt="Logo 1">
     </td>
     <td style="text-align: center; padding: 10px;">
-      <img src="agentjo_logo_2.webp" width="200" alt="Logo 2">
+      <img src="agentjo_logo_2.png" width="200" alt="Logo 2">
     </td>
     <td style="text-align: center; padding: 10px;">
-      <img src="agentjo_logo_3.webp" width="200" alt="Logo 3">
+      <img src="agentjo_logo_3.png" width="200" alt="Logo 3">
     </td>
   </tr>
   <tr>
