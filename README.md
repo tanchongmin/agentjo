@@ -1,5 +1,6 @@
 # AgentJo v0.0.5
-![AgentJo Logo](./logo/agentjo_logo.png) (Logo Designer: Boddhu Sri Pavan)
+<img src="./logo/agentjo_logo.png" alt="AgentJo Logo" width="200">
+(Logo Designer: Boddhu Sri Pavan)
 
 ### Towards Human-Friendly, Fast Learning and Adaptable Agent Communities
 #### An Open Source Initiative Led by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
