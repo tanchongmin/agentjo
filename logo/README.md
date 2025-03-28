@@ -12,29 +12,29 @@
 </p>
 <p>
   To reflect this ideology, we had a logo design competition, which ended on 11 Mar 2025, 2359hrs (GMT+8).<br>
-  <strong>Winner: Boddu Sri Pavan</strong>
+  <strong>Winner: Boddhu Sri Pavan</strong>
 </p>
 
-<table>
+<table style="border-collapse: collapse; margin: auto;">
   <tr>
-    <td style="text-align: center;">
+    <td style="text-align: center; padding: 10px;">
       <img src="agentjo_logo.webp" width="200" alt="Logo 1">
     </td>
-    <td style="text-align: center;">
+    <td style="text-align: center; padding: 10px;">
       <img src="agentjo_logo_2.webp" width="200" alt="Logo 2">
     </td>
-    <td style="text-align: center;">
+    <td style="text-align: center; padding: 10px;">
       <img src="agentjo_logo_3.webp" width="200" alt="Logo 3">
     </td>
   </tr>
   <tr>
-    <td style="background-color: #fffae6; text-align: center;">
-      <strong>Boddu Sri Pavan</strong> (winner)
+    <td style="background-color: gold; text-align: center; padding: 10px;">
+      <strong>Boddhu Sri Pavan</strong> (winner)
     </td>
-    <td style="text-align: center;">
+    <td style="text-align: center; padding: 10px;">
       <strong>Randy</strong>
     </td>
-    <td style="text-align: center;">
+    <td style="text-align: center; padding: 10px;">
       <strong>neoneye</strong>
     </td>
   </tr>
