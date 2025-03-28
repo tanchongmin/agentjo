@@ -1,11 +1,11 @@
 # AgentJo v0.0.5
+### Towards Human-Friendly, Fast Learning and Adaptable Agent Communities
+#### An Open Source Initiative Led by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
+#### This is John's dream to create fast learning and adaptable agents
 <p align="center">
   <img src="./logo/agentjo_logo.png" alt="AgentJo Logo" width="400">
 </p>
 
-### Towards Human-Friendly, Fast Learning and Adaptable Agent Communities
-#### An Open Source Initiative Led by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
-#### This is John's dream to create fast learning and adaptable agents
 Road Map (Currently at Alpha):
 ![AgentJo Future Plans](./resources/Future_Plans.png)
 
