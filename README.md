@@ -1,6 +1,6 @@
 # AgentJo v0.0.5
 <p align="center">
-  <img src="./logo/agentjo_logo.png" alt="AgentJo Logo" width="200">
+  <img src="./logo/agentjo_logo.png" alt="AgentJo Logo" width="400">
 </p>
 
 ### Towards Human-Friendly, Fast Learning and Adaptable Agent Communities
