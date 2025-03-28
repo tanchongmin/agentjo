@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-</head>
-<body>
-
 <h1>AgentJo Logo Design Competition</h1>
 <p>
-  AgentJo is John's project for the next 5 – 10 years to create fast learning and adaptable agents!
+  AgentJo is John's project for the next 5–10 years to create fast learning and adaptable agents!
 </p>
 <p>
-  To reflect this ideology, we had a logo design competition, which ended on 11 Mar 2025, 2359hrs (GMT+8).<br></br>
+  We had a logo design competition which ended on 11 Mar 2025, 2359hrs (GMT+8).<br>
   <strong>Winner: Boddhu Sri Pavan</strong>
 </p>
 
@@ -27,7 +20,7 @@
     </td>
   </tr>
   <tr>
-    <td style="background-color: blue; text-align: center; padding: 10px;">
+    <td style="background-color: gold; text-align: center; padding: 10px;">
       <strong>Boddhu Sri Pavan</strong> (winner)
     </td>
     <td style="text-align: center; padding: 10px;">
@@ -38,6 +31,3 @@
     </td>
   </tr>
 </table>
-
-</body>
-</html>
