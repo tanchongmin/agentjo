@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools >= 77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "agentjo"
-version = "0.0.5"
+version = "1.0.0"
 authors = [
   { name="John Tan Chong Min", email="tanchongmin@gmail.com" },
 ]
@@ -13,13 +13,14 @@ readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-dependencies = ["openai>=1.3.6", "dill>=0.3.7", "termcolor>=2.3.0", "requests", "pandas"]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+dependencies = ["strictjson >= 6.1.1", "openai>=1.3.6", "dill>=0.3.7", "termcolor>=2.3.0", "requests", "pandas", "pydantic"]
 
 [project.optional-dependencies]
-full = ["langchain", "PyPDF2", "python-docx", "xlrd", "sentence_transformers"]
+full = ["PyPDF2", "python-docx", "xlrd", "sentence_transformers"]
 
 [project.urls]
 Homepage = "https://github.com/tanchongmin/agentjo"

@@ -1,11 +1,7 @@
-# AgentJo v0.0.5
+# AgentJo v1.0.0
 ### Towards Human-Friendly, Fast Learning and Adaptable Agent Communities
 #### An Open Source Initiative Led by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
 #### This is John's dream to create fast learning and adaptable agents
-<p align="center">
-  <img src="./logo/agentjo_logo.png" alt="AgentJo Logo" width="400">
-</p>
-
 Road Map (Currently at Alpha):
 ![AgentJo Future Plans](./resources/Future_Plans.png)
 
@@ -13,23 +9,23 @@ Agentic System Overview:
 ![AgentJo Overview](./resources/TaskGen_Overview.png)
 
 - Discussion Channel + AgentJo Logo Design Competition (John's AI Group): [https://discord.gg/bzp87AHJy5](https://discord.gg/bzp87AHJy5)
-- Video: https://www.youtube.com/watch?v=u1BHvKRnhYY
+- Grand Vision of AgentJo: https://www.youtube.com/watch?v=u1BHvKRnhYY
 
-- AgentJo/TaskGen Paper: https://web3.arxiv.org/pdf/2407.15734
-- AgentJo/TaskGen Video: https://www.youtube.com/watch?v=F3usuxs2p1Y
+- AgentJo v0 (TaskGen) Paper: https://web3.arxiv.org/pdf/2407.15734
+- AgentJo v0 (TaskGen) Video: https://www.youtube.com/watch?v=F3usuxs2p1Y
 - Related Repositories: StrictJSON (https://github.com/tanchongmin/strictjson) [Do help star this as well!]
 
 ### Acknowledgements
 - Idea for AgentJo was built over 5 years (2019 - 2024) during John's PhD, guided by Prof. Mehul Motani
-- Initial version of AgentJo (TaskGen) was done during John's time at Simbian AI (Feb - Oct 2024), alongside talented individuals such as Prince Saroj, Brian Lim, Richard Cottrill, Bharat Runwal, Hardik
-- API key sponsorship for AgentJo's development is currently sponsored by:
+- Initial version (v0) of AgentJo (TaskGen) was done during John's time at Simbian AI (Feb - Oct 2024), alongside talented individuals such as Prince Saroj, Brian Lim, Richard Cottrill, Bharat Runwal, Hardik
+- API key sponsorship for AgentJo's development (v1 and above) is currently sponsored by:
     - Jostin Pte. Ltd. and Kent Ridge AI
-- A shoutout here too for our past sponsors: Yanok, Ajentik AI, Simbian AI
+- A shoutout here too for our past supporters sponsoring API keys for development of AgentJo v0: Yanok, Ajentik AI, Simbian AI
 
 ### Creator's Preamble
 Happy to share that we are beginning the phase to augment agents and incorporate them in larger systems.
 
-The existing implementation already includes:
+What has been done:
 - Splitting of Tasks into subtasks for bite-sized solutions for each subtask
 - Single Agent with LLM Functions
 - Single Agent with External Functions
@@ -38,11 +34,11 @@ The existing implementation already includes:
 - Retrieval Augmented Generation (RAG) over Function space
 - Memory to provide additional task-based prompts for task
 - Global Context for configuring your own prompts + add persistent variables
-- Async mode for Agent, Function and `strict_json` added
+- Async mode for Agent, Function and `strict_json`, `parse_yaml`
 
 I am quite sure that this is the best open-source agentic framework for task-based execution out there! 
 Existing frameworks like AutoGen rely too much on conversational text which is lengthy and not targeted.
-AgentJo uses StrictJSON (JSON parser with type checking and more!) as the core, and agents are efficient and are able to do Chain of Thought natively using JSON keys and descriptions as a guide.
+AgentJo uses StrictJSON (LLM structured output parser with type checking and more!) as the core, and agents are efficient and are able to do Chain of Thought natively using structured output.
 
 What can you do to help (see contrib folder for more details): 
 - Star the github so more people can use it (It's open source and free to use, even commercially!)
@@ -52,16 +48,15 @@ What can you do to help (see contrib folder for more details):
 
 I can't wait to see what this new framework can do for you!
 
-### Benefits of JSON messaging over agentic frameworks using conversational free-text like AutoGen
-- JSON format helps do Chain-of-Thought prompting naturally and is less verbose than free text
-- JSON format allows natural parsing of multiple output fields by agents
-- StrictJSON helps to ensure all output fields are there and of the right format required for downstream processing
+### Benefits of structured output over agentic frameworks using conversational free-text like AutoGen
+- Helps do Chain-of-Thought prompting naturally and is less verbose than free text
+- Allows for natural parsing of multiple output fields by agents
+- `strict_json` / `parse_yaml` helps to ensure all output fields are there and of the right format required for downstream processing
 
 ### Creator Info
 - Created: 17 Feb 2024 by [John Tan Chong Min](https://www.linkedin.com/in/john-chong-min-tan-94652288/)
 - Lead Documentation: [Brian Lim](https://www.linkedin.com/in/brianlimyisheng/)
 - Paper Research Staff: [Prince Saroj](https://www.linkedin.com/in/psaroj/), [Hardik Maheshwari](https://www.linkedin.com/in/hardik1496/), [Bharat Runwal](https://www.linkedin.com/in/bharat-runwal-673144196/), [Brian Lim](https://www.linkedin.com/in/brianlimyisheng/), [Richard Cottrill](https://www.linkedin.com/in/richardc/)
-- Logo Designer: [Boddu Sri Pavan](https://www.linkedin.com/in/boddusripavan/)
 - Collaborators welcome
 
 ## How do I use this? 
@@ -171,22 +166,20 @@ Here are 5 words that rhyme with "cool": pool, rule, fool, tool, school. Here is
 - Proceed to run tasks by using `run()`
 
 ```python
-# This is an example of an LLM-based function (see Tutorial 0)
-sentence_style = Function(fn_description = 'Output a sentence with words <var1> and <var2> in the style of <var3>', 
+# This is an example of an LLM-based function
+sentence_style = Function(fn_description = 'Output a sentence with <number> and <entity> in the style of <emotion>', 
                          output_format = {'output': 'sentence'},
-                         fn_name = 'sentence_with_objects_entities_emotion',
+                         fn_name = 'sentence_with_number_entities_emotion',
                          llm = llm)
 
-# This is an example of an external user-defined function (see Tutorial 0)
+# This is an example of an external user-defined function
 def binary_to_decimal(binary_number: str) -> int:
     '''Converts binary_number to integer of base 10'''
     return int(str(binary_number), 2)
 
-# Initialise your Agent
-my_agent = Agent('Helpful assistant', 'You are a generalist agent')
-
-# Assign the functions
-my_agent.assign_functions([sentence_style, binary_to_decimal])
+# Initialise your agent and assign the functions
+my_agent = Agent('Helpful assistant', 'You are a generalist agent', 
+        llm = llm).assign_functions([sentence_style, binary_to_decimal])
 
 # Run the Agent
 output = my_agent.run('First convert binary string 1001 to a number, then generate me a happy sentence with that number and a ball')
@@ -198,7 +191,7 @@ output = my_agent.run('First convert binary string 1001 to a number, then genera
 > {'output1': 9}
 
 `Subtask identified: Generate a happy sentence with the decimal number and a ball`
-`Calling function sentence_with_objects_entities_emotion with parameters {'obj': '9', 'entity': 'ball', 'emotion': 'happy'}`
+`Calling function sentence_with_number_entities_emotion with parameters {'number': '9', 'entity': 'ball', 'emotion': 'happy'}`
 
 > {'output': 'I am so happy with my 9 balls.'}
 
@@ -250,25 +243,23 @@ async def llm_async(system_prompt: str, user_prompt: str):
 
 #### Example Agentic Workflow
 ```python
-# This is an example of an LLM-based function (see Tutorial 0)
-sentence_style = AsyncFunction(fn_description = 'Output a sentence with words <var1> and <var2> in the style of <var3>', 
-                         output_format = {'output': 'sentence'},
-                         fn_name = 'sentence_with_objects_entities_emotion', # you must define fn_name for LLM-based functions
-                         llm = llm_async) # use an async LLM function
+# This is an example of an LLM-based function
+sentence_style = AsyncFunction(fn_description = 'Output a sentence with <number> and <entity> in the style of <emotion>', 
+                     output_format = {'output': 'sentence'}, 
+                     fn_name = 'sentence_with_number_entities_emotion',
+                     llm = llm_async)
 
 # This is an example of an external user-defined function (see Tutorial 0)
 def binary_to_decimal(binary_number: str) -> int:
     '''Converts binary_number to integer of base 10'''
     return int(str(binary_number), 2)
 
-# Initialise your Agent
-my_agent = AsyncAgent('Helpful assistant', 'You are a generalist agent')
-
-# Assign the functions
-my_agent.assign_functions([sentence_style, binary_to_decimal])
+# Initialise your Agent and assign functions
+my_agent = AsyncAgent('Helpful assistant', 'You are a generalist agent', 
+                      llm = llm_async).assign_functions([sentence_style, binary_to_decimal])
 
 # Run the Agent
-output = await my_agent.run('Generate me a happy sentence with a number and a ball. The number is b1001 converted to decimal')
+output = await my_agent.run('First convert binary string 1001 to a number, then generate me a happy sentence with that number and a ball')
 ```
 
 # 4. Shared Variables
@@ -349,17 +340,11 @@ agent = Agent('Inventory Manager',
 - These extend the baseline features of AgentJo and you are encouraged to take a look at the Tutorials for more information.
 
 # Known Limitations
-- For `gpt-4o`, sometimes the JSON is output as ` by the model. We will work on fixing this in StrictJSON directly.
-- There is an ongoing beta testing of YAML parsing (more efficient and reliable) using the parse_yaml function in StrictJSON repo. When it is more stable, it will be ported over to AgentJo repo as well.
+- There is an ongoing beta testing of YAML parsing (more efficient and reliable) using the `parse_yaml` function in StrictJSON repo. It is currently the default in AgentJo and is meant to be the more robust choice for longer text, nested outputs and code blocks.
+- However, smaller LLMs are known to output JSON better than YAML.
+- If `parse_yaml` does not work for you, to revert back to `strict_json`, simply set `llm_parser` to be `strict_json` and `llm_parser_async` to be `strict_json_async` when you declare your Agents and Functions.
 
 # Contributing to the project
-
-## Test locally
-1. Clone the repository
-2. If using a virtual environment, activate it
-3. `cd` into agentjo repository
-4. Install the package via command line `pip install -e .`
-5. Now you can import the package and use it in your code
 
 ## Submitting a pull request
 1. Fork the repository

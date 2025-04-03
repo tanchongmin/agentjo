@@ -1,3 +1,36 @@
+3 Apr 2025 (v1.0.0)
+- strictjson repo now separate from agentjo to streamline updates - all llm structured parsing will be updated in strictjson, agentjo will focus on using the structured output parsing to perform add-ons
+- HUGE Update: `parse_yaml` for more concise output formatting as yaml is much shorter than json with fewer issues for code and long text and nested fields
+- parse_yaml is now the default for LLM parsing in AgentJo, it is meant as a drop-in replacement for strict_json, but better for long output and coding due to not requiring backslashes within quotation marks
+- set the variables `llm_parser` to be `strict_json` and `llm_parser_async` to be `strict_json_async` if you would like to keep using strict_json for your Agents.
+- `parse_yaml` does compositional model creation programmatically to create a pydantic model for verification
+- Prompt for `parse_yaml optimised for a lot of common models:
+    - Claude 3.5 Sonnet
+    - Claude 3.7 Sonnet
+    - gpt-o3-mini
+    - gpt-o1-mini
+    - gpt-4o-mini
+    - gpt-4o
+    - Meta Llama 3.3 70B
+    - Meta Llama 3.2 90B (Note: Smaller versions of Llama 3.2 do not work well with YAML)
+    - Meta Llama 3.1 70B (Note: Smaller versions of Llama 3.1 do not work well with YAML)
+    - DeepSeek-V3
+    - DeepSeek-R1
+    - QwW 32B
+    - Gemini 2.0 Flash
+    - Gemini 2.0 Flash-Lite
+- Fixed empty string parsing for `strict_json` and `strict_json_async`, and also key and value names enclosed with ` (a trait of gpt-4o-mini - this is non-standard json output, but we need to cater for this as well)
+- removed ConversableAgent, chat, chat_async as these have been superceded by ConversableWrapper in wrapper.py and llm() function directly
+- removed setup.py as using pyproject.toml to build is sufficient
+- changed default verbose parameter for `Agent().reply_user` to False, to prevent excessive printing
+- Added 'Replying User Query:' to reply_user() based subtasks, for better awareness for LLM to understand the context
+- Changed the llm function description from 'For general tasks. Used only when no other function can do the task.' to 'For general tasks. Used only when no other function can do the task. Try to use it in a modular manner and perform one part of the task at a time.'. This encourages greater modularity when using the llm function
+- Added "python_generator_tool", "python_run_tool", "python_debug_tool", "python_generate_and_run_code_tool" to utils.py, where it is importable for your own coding needs
+- Added agent_wrapper and memory_classes folders to cater for more agent wrappers + memory class extensions to AgentJo
+- Added "SQlite Memory" class to memory_classes (credit: Richard)
+
+- Removed langchain from additional dependencies - replaced the recursive character splitter function with an in-house one
+
 27 Jan 2025 (v0.0.5)
 - Created a lite version of AgentJo where we only install the minimum required imports for the agent
 - Installation: Lite Version ```pip install agentjo```, Full Version ```pip install agentjo[full]```
