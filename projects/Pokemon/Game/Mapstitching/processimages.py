@@ -129,12 +129,37 @@ def initialise_map(image_cv, save_path, map_name):
 
 def split_into_patches(img, grid_size=(9, 10)):
     """Splits an image into grid of (h, w) and returns patch sizes and grid size."""
-    img_h, img_w = img.shape
+    img_h, img_w = img.shape[0:2]
     gh, gw = grid_size
     ph, pw = img_h // gh, img_w // gw  # Patch height and width
     ph2, pw2 = img_h - ph * (gh-1), img_w - pw * (gw-1)  # Last row/column patch sizes
 
     return [ph, ph2], [pw, pw2], grid_size
+
+# return image with coordinates
+def make_coordinates(img, grid_size=(9, 10), font_scale=0.5, color=(0, 0, 255), thickness=1, rescaleimg = 1):
+    """Overlays coordinate labels on the image based on the given grid size."""
+    img = cv2.resize(img, (0, 0), fx=rescaleimg, fy=rescaleimg, interpolation=cv2.INTER_NEAREST)
+    h_sizes, w_sizes, (gh, gw) = split_into_patches(img, grid_size)
+    
+    ph, ph2 = h_sizes
+    pw, pw2 = w_sizes
+    
+    for i in range(gh):
+        for j in range(gw):
+            y = i * ph if i < gh - 1 else img.shape[0] - ph2
+            x = j * pw if j < gw - 1 else img.shape[1] - pw2
+            
+            # Calculate the center of the grid cell
+            center_x = x + (pw // 2 if i < gh - 1 else pw2 // 2)
+            center_y = y + (ph // 2 if j < gw - 1 else ph2 // 2)
+            
+            label = f"({j},{i})"
+            cv2.putText(img, label, (center_x - 20, center_y + 5), cv2.FONT_HERSHEY_SIMPLEX, 
+                        font_scale, color, thickness, cv2.LINE_AA)
+    return img
+
+
 
 def generate_player_mask(screenshot):
     """
