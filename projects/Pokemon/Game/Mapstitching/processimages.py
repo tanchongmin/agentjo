@@ -3,6 +3,7 @@ import os
 from collections import Counter
 import cv2
 import numpy as np
+import json
 
 # load overall map from path
 def load_img(path):
@@ -15,6 +16,31 @@ def load_img(path):
         # except:
         raise FileNotFoundError(f"The file at {path} does not exist.")
     return Image.open(path)
+
+def save_pos(top_left_coords, output_map_path):
+    """Saves the top-left coordinates of the stitched image to a json file with filename as key."""
+
+    # Extract the filename from the output map path
+    filename = os.path.basename(output_map_path)
+
+    # Define the JSON file path
+    json_file_path = os.path.join(os.path.dirname(output_map_path), "positions.json")
+
+    # Load existing data if the JSON file exists
+    if os.path.exists(json_file_path):
+        with open(json_file_path, "r") as json_file:
+            data = json.load(json_file)
+    else:
+        data = {}
+
+    # Update the data with the new top-left coordinates
+    data[filename] = top_left_coords
+
+    # Save the updated data back to the JSON file
+    with open(json_file_path, "w") as json_file:
+        json.dump(data, json_file, indent=4)
+
+    return True
 
 def save_img(img, imgdir, img_name = "output.png"):
     maps_dir = os.path.join(os.getcwd(), 'maps')
@@ -113,9 +139,9 @@ def contains_dialogue(image):
 def convertPILToCV2(img, color = False):
     img_np = np.array(img) if type(img) != np.ndarray else img
     if img_np.shape[-1] == 4:
-        img_np_cv = cv2.cvtColor(img_np, cv2.COLOR_RGBA2GRAY) if not color else cv2.cvtColor(img_np, cv2.COLOR_RGBA2BGR) # Convert to grayscale
+        img_np_cv = cv2.cvtColor(img_np, cv2.COLOR_RGBA2GRAY) if not color else cv2.cvtColor(img_np, cv2.COLOR_RGBA2RGB) # Convert to grayscale if color
     else:
-        img_np_cv = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY) if not color else cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR) # Convert to grayscale
+        img_np_cv = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY) if not color else img_np # Convert to grayscale if color
     return img_np_cv
 
 def initialise_map(image_cv, save_path, map_name):
@@ -135,6 +161,50 @@ def split_into_patches(img, grid_size=(9, 10)):
     ph2, pw2 = img_h - ph * (gh-1), img_w - pw * (gw-1)  # Last row/column patch sizes
 
     return [ph, ph2], [pw, pw2], grid_size
+
+# return image with coordinates, takes in global player coordinate
+def make_coordinates_global(img, grid_size=(9, 10), font_scale=0.5, color=(0, 0, 255), 
+                     thickness=1, rescaleimg=1, player_position=(4, 4), top_left_position = (0,0)):
+    """Overlays coordinate labels on the image based on the given grid size and global player position."""
+    base_patch_size = 16*rescaleimg
+    img = cv2.resize(img, (0, 0), fx=rescaleimg, fy=rescaleimg, interpolation=cv2.INTER_NEAREST)
+    h_sizes, w_sizes, (gh, gw) = split_into_patches(img, grid_size) if img.shape[0] == 144 and img.shape[1] == 160 \
+        else [base_patch_size, base_patch_size+img.shape[0]%base_patch_size], [base_patch_size, base_patch_size+img.shape[1]%16], (img.shape[0]//base_patch_size, img.shape[1]//base_patch_size)
+    
+    ph, ph2 = h_sizes
+    pw, pw2 = w_sizes
+
+    # Initialize offsets with default values
+    offset_x, offset_y = 0, 0
+
+    if player_position != (4,4):
+        # Global offset: image center (4, 4) is where the player is locally
+        offset_x = player_position[0] - 4
+        offset_y = player_position[1] - 4
+    elif top_left_position != (0,0):
+        # Global offset: top left (0, 0) is the top left grid coordinates
+        offset_x = top_left_position[0] - 0
+        offset_y = top_left_position[1] - 0
+
+    for i in range(gh):
+        for j in range(gw):
+            y = i * ph if i < gh - 1 else img.shape[0] - ph2
+            x = j * pw if j < gw - 1 else img.shape[1] - pw2
+            
+            # Calculate the center of the grid cell
+            center_x = x + (pw // 2 if j < gw - 1 else pw2 // 2)
+            center_y = y + (ph // 2 if i < gh - 1 else ph2 // 2)
+            
+            # Global coordinate label
+            global_x = j + offset_x
+            global_y = i + offset_y
+            label = f"({global_x},{global_y})"
+            
+            cv2.putText(img, label, (center_x - 25, center_y + 5), cv2.FONT_HERSHEY_SIMPLEX, 
+                        font_scale, color, thickness, cv2.LINE_AA)
+    # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = cv2.resize(img, (0, 0), fx=1/rescaleimg, fy=1/rescaleimg, interpolation=cv2.INTER_NEAREST)
+    return img
 
 # return image with coordinates
 def make_coordinates(img, grid_size=(9, 10), font_scale=0.5, color=(0, 0, 255), thickness=1, rescaleimg = 1):
@@ -172,14 +242,14 @@ def generate_player_mask(screenshot):
     mask[402-107:402+1, 430-107:430] = 0
     return mask
 
-def determine_displacement(array1, array2, grid_size=(9, 10), thresh = 0.8, offset=1):
+def determine_displacement(array1, array2, grid_size=(9, 10), thresh = 0.8, offset=1, player_position=(4,4)):
     """
     Determines the best displacement direction by cropping array2 to its inner grid
     and matching it to array1. Calculates the necessary canvas size for stitching
     and determines the relative positions of array1 and array2.
 
     Parameters:
-        array1 (numpy array): The base image to which array2 will be matched.
+        array1 (numpy array): The base map to which array2 will be matched.
         array2 (numpy array): The image to be matched and stitched to array1.
         grid_size (tuple): The grid size used for splitting the image (default is (9, 10)).
         thresh (float): The threshold for match confidence (default is 0.8).
@@ -191,58 +261,36 @@ def determine_displacement(array1, array2, grid_size=(9, 10), thresh = 0.8, offs
     """
     # Split array2 into patches to calculate patch dimensions
     patch_heights, patch_widths, grid_size = split_into_patches(array2, (grid_size[0]+(1-offset)*2, grid_size[1]+(1-offset)*2))
-    # print("patch_heights", patch_heights, "patch_widths", patch_widths, "grid_size", grid_size, array2.shape)
     ph, ph2 = patch_heights
     pw, pw2 = patch_widths
     gh, gw = grid_size
 
     # Crop array2 to its inner grid (remove first and last row/column)
-    # inner_array2 = array2[ph*offset:-ph2-ph*(offset-1), pw*offset:-pw2-pw*(offset-1)]
     inner_array2 = array2[ph:-ph2, pw:-pw2]
-
-    # cv2.rectangle(array2, (ph*offset, pw*offset), (ph*offset+inner_array2.shape[1], pw*offset+inner_array2.shape[0]), (0, 255, 0), 2)
-    # cv2.rectangle(array2, (430, 400), (430+107, 400+107), (255, 0 , 0), 2)
-    # cv2.imshow("inner array2", array2)
 
     best_coordinates = None
     player_mask = np.zeros(inner_array2.shape, dtype=np.uint8)
     #set all to 1
     player_mask[:, :] = 1
     #set player to 0: player position = 430, 445 to 430 + 107, 445 + 107
-    print(offset, ph, pw)
-    print(402-(ph*offset),403-(ph*(offset-1)), 430-(pw*offset),430-(pw*(offset-1)))
     player_mask[402-(ph*offset):403-(ph*(offset-1)), 430-(pw*offset):430-(pw*(offset-1))] = 0
     # player_mask[402-(107*offset):402+1-(107*offset-1), 430-(107*offset):430-(107*offset-1)] = 0    
     # player_mask = generate_player_mask(inner_array2)
 
-    # Visualize inner_array2 with the mask applied
-    masked_inner_array2 = cv2.bitwise_and(inner_array2, inner_array2, mask=player_mask)
+    ## Visualize inner_array2 with the mask applied
+    # masked_inner_array2 = cv2.bitwise_and(inner_array2, inner_array2, mask=player_mask)
     # cv2.imshow(f"Inner Array2 with Mask{offset}", masked_inner_array2)
 
     # Use cv2.matchTemplate to find the best match for inner_array2 in array1
     result = cv2.matchTemplate(array1, inner_array2, cv2.TM_CCOEFF_NORMED, mask = player_mask)
     _, max_val, _, max_loc= cv2.minMaxLoc(result)
-    print(max_val, "max_val")
-    basey, basex = array1.shape
+
     if max_val > thresh:
-        #print out match
-        # Draw a rectangle around the best match on array1
-        top_left = max_loc
-        bottom_right = (top_left[0] + inner_array2.shape[1], top_left[1] + inner_array2.shape[0])
-        cv2.rectangle(array1, top_left, bottom_right, (0, 255, 0), 2)
-        # Show the image with the rectangle
-
-        # cv2.imshow("Best Match", array1)
-
         # Determine the best direction based on the location of the match
         best_coordinates = max_loc  # Top-left corner of the best match
 
-        print(best_coordinates)
-
+        # not sure why but this is [y(height), x(width)]
         array2_coord = [best_coordinates[1]-(ph*offset), best_coordinates[0]-(pw*offset)]
-        print(array2_coord, "array2_coord")
-        # array2_coord[0] = 0 if abs(array2_coord[0]) < 5 else array2_coord[0]
-        # array2_coord[1] = 0 if abs(array2_coord[1]) < 5 else array2_coord[1]
 
         expandy = expandx = 0
         # if any coord in array2 outside array1 bounds, expand canvas.
@@ -251,10 +299,7 @@ def determine_displacement(array1, array2, grid_size=(9, 10), thresh = 0.8, offs
         if array2_coord[1] < 0 or array2_coord[1]+array2.shape[1]+(pw*2*(offset-1)) > array1.shape[1]:
             expandx = -array2_coord[1] if array2_coord[1] < 0 else array2_coord[1]+array2.shape[1]+(pw*2*(offset-1))-array1.shape[1]
 
-        # print("expandy condition", array2_coord[0]+array2.shape[0]+(ph*(offset-1)), array2_coord[0]+array2.shape[0]+(ph*(offset-1)) > array1.shape[0])
-        # print("expandx condition", array2_coord[1]+array2.shape[1]+(pw*(offset-1)), array2_coord[1]+array2.shape[1]+(pw*(offset-1)) > array1.shape[1])
         # #final coord
-        print(expandy, expandx, "expand", array2.shape, array1.shape)
         new_height = array1.shape[0]+expandy
         new_width = array1.shape[1]+expandx
 
@@ -266,17 +311,25 @@ def determine_displacement(array1, array2, grid_size=(9, 10), thresh = 0.8, offs
         if array2_coord[1] < 0:
             array1_w = -array2_coord[1]
             array2_coord[1]  = 0
-        return (new_height, new_width), (array1_h, array1_w), array2_coord
+
+        grid_y = array2_coord[0] // ph
+        grid_x = array2_coord[1] // pw
+
+        global_x = player_position[0] - 4
+        global_y = player_position[1] - 4
+
+        canvas_top_left_x = global_x - max(0, grid_x)
+        canvas_top_left_y = global_y - max(0, grid_y)
+
+        return (new_height, new_width), (array1_h, array1_w), array2_coord, (canvas_top_left_x, canvas_top_left_y)
     else:
         #try again with smaller area match
-        print(inner_array2.shape)
-        cv2.imshow(f"failed to match inner_array2+{offset}", inner_array2)
+        print(f"failed to match inner_array2+{offset}")
         while offset < 2:
             offset += 1
             return determine_displacement(array1, inner_array2, offset=offset)
-        print("No match found with confidence above threshold. Printing canvas for sanity sake")
-        # return (2000, 2000), (0, 0), (0,0)
-        return None, None, None
+        print("No match found with confidence above threshold.")
+        return None, None, None, None
 
 def stitch_images(canvas, array1_coord, array2_coord, array1, array2):
     """

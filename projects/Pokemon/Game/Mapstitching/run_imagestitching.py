@@ -1,4 +1,4 @@
-from Mapstitching.processimages import (load_img, save_img, convertPILToCV2, 
+from Mapstitching.processimages import (load_img, save_img, save_pos, convertPILToCV2, 
                            resize_image, contains_dialogue, crop_to_game_area, 
                            stitch_images, determine_displacement, 
                            get_sorted_images, initialise_map)
@@ -9,7 +9,7 @@ import argparse
 import sys
 from PIL import Image
 
-def run_imagestitching(image_input):
+def run_imagestitching(image_input, player_position = (4,4)):
     """Main function that handles image input either as path or numpy array"""
     if isinstance(image_input, str):
         # If image_input is a string (path), load the image
@@ -30,7 +30,7 @@ def run_imagestitching(image_input):
         initial = image_input
     else:
         print("Error: Invalid input type. Expected image path (str) or image as numpy array.")
-        return "INVALIDINPUT", initial
+        return "INVALIDINPUT", initial, player_position
         sys.exit(1)
 
     # Define directories for images and maps
@@ -44,7 +44,7 @@ def run_imagestitching(image_input):
     initial_img, has_dialogue = contains_dialogue(initial)
     if has_dialogue:
         print("Image contains dialogue, skipping.")
-        return "DIALOGUE", initial
+        return "DIALOGUE", initial, player_position
     # Other special screens, currently not used
     # elif has_battle:
     #     print("Image contains battle, skipping.")
@@ -70,26 +70,29 @@ def run_imagestitching(image_input):
         map_color = convertPILToCV2(next_img, color=True)
 
         # Determine displacement between the map and the next image
-        canvas, array1_coord, array2_coord = determine_displacement(map_cv, crop_image_cv)
+        canvas, array1_coord, array2_coord, top_left_coords = determine_displacement(map_cv, crop_image_cv, player_position = player_position)
         if canvas is not None:
             print(f"Match found with {map_path.split('/')[-1]}")
             # Stitch the images together and save the updated map
             stitched_image_mid = stitch_images(canvas, array1_coord, array2_coord, map_color, crop_color)
             output_map_path = save_img(stitched_image_mid, maps_directory, map_path.split('/')[-1])
+            save_map_position = save_pos(top_left_coords, output_map_path)
             match_found = True
             break
     
     if stitched_image_mid is not None:
-        return output_map_path, stitched_image_mid
+        return output_map_path, stitched_image_mid, top_left_coords
 
     # If no match is found, initialize a new map
     if not match_found:
-        print(f"New map for {img_path.split('/')[-1]} due to no match.")
+        print(f"New map due to no match.")
+        new_map_path = os.path.join(maps_directory, f"Map_{len(existing_maps) + 1}.png")
         crop_color = initialise_map(crop_color, maps_directory, f"Map_{len(existing_maps) + 1}.png")
+        save_map_position = save_pos((player_position[0]-4, player_position[1]-4), new_map_path)
         # Add the new map to the list of existing maps
-        existing_maps.append(os.path.join(maps_directory, f"Map_{len(existing_maps) + 1}.png"))
+        existing_maps.append(new_map_path)
 
-        return os.path.join(maps_directory, f"Map_{len(existing_maps) + 1}.png"), crop_color
+        return new_map_path, crop_color, (player_position[0]-4, player_position[1]-4)
 
 
 def parse_args():
