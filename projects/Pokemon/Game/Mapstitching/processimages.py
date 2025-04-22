@@ -47,9 +47,13 @@ def save_img(img, imgdir, img_name = "output.png"):
     if not os.path.exists(maps_dir):
         os.makedirs(maps_dir)
 
+    # if img is not Image.Image, switch cv2 BGR2RGB for saving
+    if isinstance(img, np.ndarray):
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) if img.shape[-1] == 3 else cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)
+
     # Overwrite the file if img_name already exists
     if os.path.exists(os.path.join(imgdir, img_name)):
-        print(f"Overwriting existing file: {img_name}")
+        # print(f"Overwriting existing file: {img_name}")
         img.save(os.path.join(imgdir, img_name)) if isinstance(img, Image.Image) else cv2.imwrite(os.path.join(imgdir, img_name), img)
     else:
         if "Map" in img_name:
@@ -62,7 +66,7 @@ def save_img(img, imgdir, img_name = "output.png"):
             else:
                 # Start with Map_1 if no maps exist
                 img_name = "Map_1.png"
-        print(f"Saving new file: {img_name}")            
+        # print(f"Saving new file: {img_name}")            
         img.save(os.path.join(imgdir, img_name)) if type(img) == Image.Image else cv2.imwrite(os.path.join(maps_dir, img_name), img)
     return os.path.join(imgdir, img_name)
 
@@ -83,7 +87,7 @@ def crop_to_game_area(image, game_size = (966, 970)):
         r += 1
     # print(Counter([image.getpixel((x, height - b - 2)) for x in range(width)]))
     # print(sum([image.getpixel((x, height - b - 1)) == colormap["outside_black"] or image.getpixel((x, height - b - 1)) == colormap["outside_white"] or image.getpixel((x, height - b - 1)) == (23,23,23,255) for x in range(width)]))
-    print(l, r, t, b)
+    # print(l, r, t, b)
 
     #crop image by l r t b
     image = image.crop((l, t, width - r, height - b))
@@ -136,12 +140,18 @@ def contains_dialogue(image):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-def convertPILToCV2(img, color = False):
+def convertPILToCV2(img, color = False, map = False):
     img_np = np.array(img) if type(img) != np.ndarray else img
-    if img_np.shape[-1] == 4:
-        img_np_cv = cv2.cvtColor(img_np, cv2.COLOR_RGBA2GRAY) if not color else cv2.cvtColor(img_np, cv2.COLOR_RGBA2RGB) # Convert to grayscale if color
+    if map:
+        if img_np.shape[-1] == 4:
+            img_np_cv = cv2.cvtColor(img_np, cv2.COLOR_RGBA2GRAY) if not color else img_np #cv2.cvtColor(img_np, cv2.COLOR_RGBA2BGR) # Convert to grayscale if color
+        else:
+            img_np_cv = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY) if not color else img_np #cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR) # Convert to grayscale if color
     else:
-        img_np_cv = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY) if not color else img_np # Convert to grayscale if color
+        if img_np.shape[-1] == 4:
+            img_np_cv = cv2.cvtColor(img_np, cv2.COLOR_RGBA2GRAY) if not color else cv2.cvtColor(img_np, cv2.COLOR_RGBA2RGB) #cv2.cvtColor(img_np, cv2.COLOR_RGBA2BGR) # Convert to grayscale if color
+        else:
+            img_np_cv = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY) if not color else img_np #cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR) # Convert to grayscale if color
     return img_np_cv
 
 def initialise_map(image_cv, save_path, map_name):
@@ -203,7 +213,7 @@ def make_coordinates_global(img, grid_size=(9, 10), font_scale=0.5, color=(0, 0,
             cv2.putText(img, label, (center_x - 25, center_y + 5), cv2.FONT_HERSHEY_SIMPLEX, 
                         font_scale, color, thickness, cv2.LINE_AA)
     # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    img = cv2.resize(img, (0, 0), fx=1/rescaleimg, fy=1/rescaleimg, interpolation=cv2.INTER_NEAREST)
+    # img = cv2.resize(img, (0, 0), fx=1/rescaleimg, fy=1/rescaleimg, interpolation=cv2.INTER_NEAREST)
     return img
 
 # return image with coordinates
@@ -324,11 +334,11 @@ def determine_displacement(array1, array2, grid_size=(9, 10), thresh = 0.8, offs
         return (new_height, new_width), (array1_h, array1_w), array2_coord, (canvas_top_left_x, canvas_top_left_y)
     else:
         #try again with smaller area match
-        print(f"failed to match inner_array2+{offset}")
+        # print(f"failed to match inner_array2+{offset}")
         while offset < 2:
             offset += 1
             return determine_displacement(array1, inner_array2, offset=offset)
-        print("No match found with confidence above threshold.")
+        # print("No match found with confidence above threshold.")
         return None, None, None, None
 
 def stitch_images(canvas, array1_coord, array2_coord, array1, array2):
@@ -369,8 +379,8 @@ def stitch_images(canvas, array1_coord, array2_coord, array1, array2):
 
     # Add array 2 only where mask is pass-through using cv2.bitwise_and
     masked_array2 = cv2.bitwise_and(array2, array2, mask=player_mask)
-    print("array2 shape", array2.shape, "array1 shape", array1.shape)
-    print("st shape", stitched_array[array2_coord[0]:array2_coord[0] + array2.shape[0], array2_coord[1]:array2_coord[1] + array2.shape[1]].shape, "masked2 shape", masked_array2.shape)
+    # print("array2 shape", array2.shape, "array1 shape", array1.shape)
+    # print("st shape", stitched_array[array2_coord[0]:array2_coord[0] + array2.shape[0], array2_coord[1]:array2_coord[1] + array2.shape[1]].shape, "masked2 shape", masked_array2.shape)
 
     # cv2.imshow("array2", array2)
 
@@ -381,7 +391,7 @@ def stitch_images(canvas, array1_coord, array2_coord, array1, array2):
     # Fill in stitched_array using array1 where it's within array1_coord and both are black
     stitched_region = stitched_array[array1_coord[0]:array1_coord[0]+array1.shape[0], array1_coord[1]:array1_coord[1]+array1.shape[1]]
     # Create a mask for continuous black rectangular regions in stitched_array
-    gray_stitched = cv2.cvtColor(stitched_region, cv2.COLOR_BGR2GRAY)  # Convert to grayscale
+    gray_stitched = cv2.cvtColor(stitched_region, cv2.COLOR_RGB2GRAY)  # Convert to grayscale
     _, binary_mask = cv2.threshold(gray_stitched, 5, 255, cv2.THRESH_BINARY_INV)  # Binary mask for non-black regions
     # binary_mask = cv2.adaptiveThreshold(gray_stitched, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
     kernelint = 3
@@ -433,7 +443,7 @@ def stitch_images(canvas, array1_coord, array2_coord, array1, array2):
     # Fill in stitched_array using array1 where it's within array1_coord and both are black
     stitched_region = stitched_array[array2_coord[0]:array2_coord[0] + array2.shape[0], array2_coord[1]:array2_coord[1] + array2.shape[1]]
     # Create a mask for continuous black rectangular regions in stitched_array
-    gray_stitched = cv2.cvtColor(stitched_region, cv2.COLOR_BGR2GRAY)  # Convert to grayscale
+    gray_stitched = cv2.cvtColor(stitched_region, cv2.COLOR_RGB2GRAY)  # Convert to grayscale
     _, binary_mask = cv2.threshold(gray_stitched, 5, 255, cv2.THRESH_BINARY_INV)  # Binary mask for non-black regions
     # binary_mask = cv2.adaptiveThreshold(gray_stitched, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
     kernelint = 3

@@ -43,7 +43,7 @@ def run_imagestitching(image_input, player_position = (4,4)):
     # Check if image is invalid (dialogue, battle, etc.)
     initial_img, has_dialogue = contains_dialogue(initial)
     if has_dialogue:
-        print("Image contains dialogue, skipping.")
+        # print("Image contains dialogue, skipping.")
         return "DIALOGUE", initial, player_position
     # Other special screens, currently not used
     # elif has_battle:
@@ -72,7 +72,7 @@ def run_imagestitching(image_input, player_position = (4,4)):
         # Determine displacement between the map and the next image
         canvas, array1_coord, array2_coord, top_left_coords = determine_displacement(map_cv, crop_image_cv, player_position = player_position)
         if canvas is not None:
-            print(f"Match found with {map_path.split('/')[-1]}")
+            # print(f"Match found with {map_path.split('/')[-1]}")
             # Stitch the images together and save the updated map
             stitched_image_mid = stitch_images(canvas, array1_coord, array2_coord, map_color, crop_color)
             output_map_path = save_img(stitched_image_mid, maps_directory, map_path.split('/')[-1])
@@ -85,7 +85,7 @@ def run_imagestitching(image_input, player_position = (4,4)):
 
     # If no match is found, initialize a new map
     if not match_found:
-        print(f"New map due to no match.")
+        # print(f"New map due to no match.")
         new_map_path = os.path.join(maps_directory, f"Map_{len(existing_maps) + 1}.png")
         crop_color = initialise_map(crop_color, maps_directory, f"Map_{len(existing_maps) + 1}.png")
         save_map_position = save_pos((player_position[0]-4, player_position[1]-4), new_map_path)
