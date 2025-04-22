@@ -22,9 +22,6 @@ Agentic System Overview:
 ### Acknowledgements
 - Idea for AgentJo was built over 5 years (2019 - 2024) during John's PhD, guided by Prof. Mehul Motani
 - Initial version (v0) of AgentJo (TaskGen) was done during John's time at Simbian AI (Feb - Oct 2024), alongside talented individuals such as Prince Saroj, Brian Lim, Richard Cottrill, Bharat Runwal, Hardik
-- API key sponsorship for AgentJo's development (v1 and above) is currently sponsored by:
-    - Jostin Pte. Ltd. and Kent Ridge AI
-- A shoutout here too for our past supporters sponsoring API keys for development of AgentJo v0: Yanok, Ajentik AI, Simbian AI
 
 ### Creator's Preamble
 Happy to share that we are beginning the phase to augment agents and incorporate them in larger systems.
@@ -40,8 +37,6 @@ What has been done:
 - Global Context for configuring your own prompts + add persistent variables
 - Async mode for Agent, Function and `strict_json`, `parse_yaml`
 
-I am quite sure that this is the best open-source agentic framework for task-based execution out there! 
-Existing frameworks like AutoGen rely too much on conversational text which is lengthy and not targeted.
 AgentJo uses StrictJSON (LLM structured output parser with type checking and more!) as the core, and agents are efficient and are able to do Chain of Thought natively using structured output.
 
 What can you do to help (see contrib folder for more details): 
