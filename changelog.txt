@@ -1,3 +1,7 @@
+25 May 2025 (v1.1.0)
+- Included sub-folders of agentjo that waas causing some issue when loading agentjo
+- Uses strictjson v6.1.2 (removal of asyncio package for greater compatibility)
+
 3 Apr 2025 (v1.0.0)
 - strictjson repo now separate from agentjo to streamline updates - all llm structured parsing will be updated in strictjson, agentjo will focus on using the structured output parsing to perform add-ons
 - HUGE Update: `parse_yaml` for more concise output formatting as yaml is much shorter than json with fewer issues for code and long text and nested fields
