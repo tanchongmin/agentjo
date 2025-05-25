@@ -1,5 +1,5 @@
 25 May 2025 (v1.1.0)
-- Included sub-folders of agentjo that waas causing some issue when loading agentjo
+- Included sub-folders of agentjo that was causing some issue when loading agentjo
 - Uses strictjson v6.1.2 (removal of asyncio package for greater compatibility)
 
 3 Apr 2025 (v1.0.0)
